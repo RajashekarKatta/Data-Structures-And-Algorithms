@@ -72,4 +72,8 @@ reduce the array size by 1 to remove the extra element at the end.So this take T
 So this take Time Complexity O(n)
 """
 
-# 
+# Delete an Element from the end of an array
+"""To delete an element from the end of an array, we can simply reduce the size of array by 1. So this takes Time complexity O(1)
+"""
+
+
