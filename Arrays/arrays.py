@@ -406,3 +406,125 @@ class Solution:
 s = Solution()
 arr = [1,6,3,4,1,2,6,3,2]
 print(s.frequency_count(arr))
+
+
+# Find the closest numbeer to Zero
+class Solution:
+    def closest_to_zero(self, arr):
+        closest = arr[0]
+        for num in arr:
+            if abs(num) < abs(closest):
+                closest = num
+            elif abs(num) == abs(closest):
+                closest = max(closest, num)
+        return closest
+s = Solution()
+arr = [-4,-2,1,-1,4,8]
+print(s.closest_to_zero(arr))
+
+# Find the given Two arrays Union
+class Solution:
+    def union_of_arrays(sself, arr1, arr2):
+        union = []
+        seen = set()
+        for num in arr1:
+            if num not in seen:
+                seen.add(num)
+                union.append(num)
+        for num in arr2:
+            if num not in seen:
+                seen.add(num)
+                union.append(num)
+        return union
+s = Solution()
+arr1 = [1,2,3,4]
+arr2 = [1,2,3]
+print(s.union_of_arrays(arr1, arr2))  
+
+
+# # Intersection of Two arrays
+class Solution:
+    def intersection_of_arrays(self, arr1, arr2):
+        intersection = []
+        seen = set(arr2)              # this is important step
+        for num in arr1:
+            if num in seen:
+                intersection.append(num)
+        return intersection
+s = Solution()
+arr1 = [1,2,3,4]
+arr2 = [2,4,6]
+print(s.intersection_of_arrays(arr1, arr2))
+
+
+# Find the Single Number in a given number
+class Solution:
+    def single_number(self, arr):
+        freq = {}
+        for num in arr:
+            freq[num] = freq.get(num, 0) + 1
+        for num in freq:
+            if freq[num] == 1:
+                return f"Single number in an given array: {num}"
+        return - 1
+s = Solution()
+arr = [4, 1, 2, 1, 2]
+print(s.single_number(arr))
+
+# Count Occurrences of an Element in an given array
+class Solution:
+    def coun_occurrence(sel, arr, target):
+        count = 0
+        for num in arr:
+            if num == target:
+                count += 1 
+        return count                # Count of an element 2 is 3 because three times appears in array
+s = Solution()
+arr = [1, 2, 2, 2, 3]
+print(s.coun_occurrence(arr, 2))
+
+
+# # check if two arrays are equal:
+class Solution:
+    def check_two_array_are_equal(self, arr1, arr2):
+        if len(arr1) != len(arr2):
+            return False
+        for i in range(len(arr1)):
+            if arr1[i] != arr2[i]:
+                return False
+        return True
+s = Solution()
+arr1 = [1,2,3,4]
+arr2 = [1,2,3,4]
+print(s.check_two_array_are_equal(arr1, arr2))
+
+# Find the first repeating element in an array of integers
+# Given an array of integers arr[], The task is to find the index of first repeating element in it i.e. 
+# the element that occurs more than once and whose index of the first occurrence is the smallest. 
+# Input: arr[] = {10, 5, 3, 4, 3, 5, 6}  -> Output: 5
+class Solution:
+    def first_repeating_ele(self, arr):
+        freq = {}                               # Here We are using hashmap 
+        for num in arr:  
+            freq[num] = freq.get(num, 0) + 1
+        for num in freq:
+            if freq[num] > 1:
+                return num
+s = Solution()
+arr = [10, 5, 3, 4, 3, 5, 6]
+print(s.first_repeating_ele(arr))
+
+# Another way to find the first repeating element
+class Solution:
+    def first_repeat_ele(self, arr):
+        seen = set()                # here we are using hash set
+        first = -1
+        for i in range(len(arr)-1, -1, -1):  #  here to line 522 to 525 most important lines for this problem.
+            if arr[i] in seen:
+                first = arr[i]
+            seen.add(arr[i])
+        return first
+s = Solution()
+arr = [10, 5, 3, 4, 3, 5, 6]
+print(s.first_repeat_ele(arr))
+
