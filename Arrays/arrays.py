@@ -300,6 +300,8 @@ s = Solution()
 arr = [4,7,19,16]
 print(s.min_increment(arr, 3))
 
+
+
 # Find the Largest element in a given array
 class Solution:
     def largest_ele(self, arr):
@@ -312,3 +314,95 @@ class Solution:
 s = Solution()
 arr = [10,20,30,40,50]
 print(s.largest_ele(arr))
+
+
+
+# Find the sum of all elements
+class Solution:
+    def sum_of_elements(self, arr):
+        total = 0
+        for num in arr:
+            total += num
+        return total
+s =  Solution()
+arr = [10,20,30,40,50]
+print(s.sum_of_elements(arr))
+
+
+# Find the second largest element in the given array
+class Solution:
+    def second_largest_element(self, arr):
+        largest = arr[0]
+        second = arr[0]
+        for num in arr:
+            if num > largest:
+                second = largest
+                largest = num
+            elif num > second and num != largest:  # this is important because incase if you get both it will look second largest
+                second = num
+        return second
+
+s = Solution()
+arr = [10.,25,54,39,16,54,]
+print(s.second_largest_element(arr))
+
+
+# Largest three distinct elements in an array
+# Given an array arr[], the task is to find the top three largest distinct integers present in the array.
+# Note: If there are less than three distinct elements in the array, then return the available distinct numbers in descending order.
+# Input: arr[] = [10, 4, 3, 50, 23, 90] -> Output: [90, 50, 23
+class Solution:
+    def largest_distinct_three(self, arr):
+        largest = arr[0]
+        second_largest = arr[0]
+        third_largest = arr[0]
+        for num in arr:
+            if num > largest:
+                third_largest = second_largest
+                second_largest = largest
+                largest = num
+            elif num > second_largest and num != largest:
+                third_largest = second_largest
+                second_largest = num
+            elif num > third_largest and num != second_largest and num != largest:
+                third_largest = num
+        return largest, second_largest, third_largest
+s = Solution()
+arr = [10, 4, 3, 50, 23, 90]
+print(s.largest_distinct_three(arr))
+
+
+# Check if the given Array is Sorted or not if sorted return True or else return False
+class Solution:
+    def is_sorted(self, arr):
+        for i in range(1, len(arr)):
+            if arr[i] < arr[i-1]:                   # Here this line is important
+                return False
+        return True
+s = Solution()
+arr = [1,5,3,2,4]
+print(s.is_sorted(arr))
+
+
+# Find the missing number in a given array
+class Solution:
+    def missing_number(self, arr):
+        n = len(arr) + 1
+        total_sum = sum(arr)
+        expected_sum = n * (n+1) //2        # here most important part is parenthis(n+1) if you forgot to put parenthsis the output will chage 
+        return expected_sum - total_sum
+s = Solution()
+arr = [1,2,3,5]     # here missing number is 4 lets see output
+print(s.missing_number(arr))
+
+
+# Find the frequency of an given array
+class Solution:
+    def frequency_count(self, arr):
+        freq = {}
+        for num in arr:
+            freq[num] = freq.get(num, 0) + 1
+        return freq
+s = Solution()
+arr = [1,6,3,4,1,2,6,3,2]
+print(s.frequency_count(arr))
