@@ -192,4 +192,123 @@ arr = [1,2,3]
 print(s.generate_subarrays(arr))
 
 
+# Reversing an array
+class Solution:
+    def reverse_arr(self, arr):
+        left, right = 0, len(arr)-1
+        while left < right:      # Here we are using two pointer technique
+            arr[left], arr[right] = arr[right], arr[left]
+            left += 1
+            right -= 1
+        return arr
+s = Solution()
+arr = [1,2,3,4,5]
+print(s.reverse_arr(arr))
 
+
+# # Rotate an Array - Clockwise or Right
+# Rotations in the array is defined as the process of rearranging the elements in an array by shifting each element to a new position. 
+# This is mostly done by rotating the elements of the array clockwise or counterclockwise.
+# input: arr[] = {1, 2, 3, 4, 5, 6}, d = 2 -> Output: {5, 6, 1, 2, 3, 4}
+class Solution:
+    def rotate_arr(self, arr, d):     # Right rotation 
+        n =len(arr)
+        d = d % n
+        def reverse(arr, left, right):
+            while left < right:
+                arr[left], arr[right] = arr[right], arr[left]
+                left += 1
+                right -= 1
+
+        reverse(arr, 0, n-1)
+        reverse(arr, 0, d-1)
+        reverse(arr, d, n-1)
+        return arr                  # output [4,5,1,2,3]
+  
+s = Solution()
+arr = [1,2,3,4,5]
+print(s.rotate_arr(arr, 2)) 
+
+
+# # Rotate an Array - Anti-Clockwise or left
+class Solution:
+    def rotate_arr_left(self, arr, d):
+        n = len(arr)
+        d = d % n
+        def reverse(arr, left, right):
+            while left < right:
+                arr[left], arr[right] = arr[right], arr[left]
+                left += 1
+                right -= 1
+        reverse(arr, 0, d-1)
+        reverse(arr, d, n-1)
+        reverse(arr, 0, n-1)
+        return arr
+s = Solution()
+arr = [1,2,3,4,5]
+print(s.rotate_arr_left(arr, 2))
+
+
+# Move all Zeros to End of Array
+# Given an array of integers arr[], move all the zeros to the end of the array while maintaining the relative order of all non-zero elements.
+# Input: arr[] = [1, 2, 0, 4, 3, 0, 5, 0]  -> Output: [1, 2, 4, 3, 5, 0, 0, 0] -> Time  → O(n) Space → O(1)
+class Solution:
+    def move_zeros(self, arr):
+        count = 0
+        for i in range(len(arr)):
+            if arr[i] != 0:
+                arr[count], arr[i] = arr[i], arr[count]   # here we are using two pointer technique
+                count += 1
+        return arr
+
+s = Solution()
+arr = [1, 2, 0, 4, 3, 0, 5, 0]
+print(s.move_zeros(arr))
+
+
+# Another Way to find the answer ->  Time O(n) Space → O(1)
+class Solution:
+    def move_zeros_end(self, arr):
+        count = 0
+        for i in range(len(arr)):
+            if arr[i] != 0:
+                arr[count] = arr[i]
+                count += 1
+        while count < len(arr):
+            arr[count] = 0
+            count += 1
+        return arr
+s = Solution()
+arr = [1, 2, 0, 4, 3, 0, 5, 0]
+print(s.move_zeros_end(arr))
+
+
+# Minimum increment by k operations to make all equal
+# You are given an array of n-elements, you have to find the number of operations needed to make all elements of array equal.
+# Where a single operation can increment an element by k. If it is not possible to make all elements equal print -1.
+# Input : arr[] = {4, 7, 19, 16},  k = 3  -> Output : 10
+class Solution:
+    def min_increment(self, arr, k):
+        total = 0
+        max_one = max(arr)
+        for i in range(len(arr)):
+            if (max_one - arr[i]) % k != 0 :
+                return -1
+            total += (max_one - arr[i]) // k
+        return f"Number of Operations needed : {total}"
+s = Solution()
+arr = [4,7,19,16]
+print(s.min_increment(arr, 3))
+
+# Find the Largest element in a given array
+class Solution:
+    def largest_ele(self, arr):
+        largest = arr[0]
+        for num in arr:
+            if num > largest:
+                largest = num
+        return f"Largest element in the given array: {largest}"
+
+s = Solution()
+arr = [10,20,30,40,50]
+print(s.largest_ele(arr))
