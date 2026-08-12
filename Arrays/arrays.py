@@ -76,4 +76,36 @@ So this take Time Complexity O(n)
 """To delete an element from the end of an array, we can simply reduce the size of array by 1. So this takes Time complexity O(1)
 """
 
+# Example for Basic Arrays
+# Alternate elements of an array --> Given an array arr[], the task is to print every alternate element of the array starting from the first element.
+class Solutions:
+    def alter_native_ele(self, arr):
+        result = []
+        for i in range(0, len(arr), 2):
+            result.append(arr[i])
+        return result
+s = Solutions()
+arr = [1,2,3,4,5,6]
+print(s.alter_native_ele(arr))
 
+
+# Leaders in an array
+"""Given an array arr[] of size n, the task is to find all the Leaders in the array. 
+An element is a Leader if it is greater than or equal to all the elements to its right side. Note: The rightmost element is always a leader.
+Input: arr[] = [16, 17, 4, 3, 5, 2]
+
+"""
+class Solution:
+    def leaders(self, arr):
+        leaders = []
+        max_from_right = arr[-1]
+        leaders.append(max_from_right)
+        for i in range(len(arr)-2, -1, -1):
+            if arr[i] > max_from_right:
+                max_from_right = arr[i]
+                leaders.append(arr[i])
+        leaders.reverse()
+        return leaders
+s = Solution()
+arr = [16, 17, 4, 3, 5, 2]
+print(s.leaders(arr))
