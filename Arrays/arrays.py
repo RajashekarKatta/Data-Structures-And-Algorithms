@@ -99,8 +99,9 @@ class Solution:
     def leaders(self, arr):
         leaders = []
         max_from_right = arr[-1]
+        n = len(arr)
         leaders.append(max_from_right)
-        for i in range(len(arr)-2, -1, -1):
+        for i in range(n-2, -1, -1):      # This is the important step -> (n-2, -1,-1) 
             if arr[i] > max_from_right:
                 max_from_right = arr[i]
                 leaders.append(arr[i])
@@ -109,3 +110,34 @@ class Solution:
 s = Solution()
 arr = [16, 17, 4, 3, 5, 2]
 print(s.leaders(arr))
+
+
+# # Rotating Array by one Position right side
+class Solution:
+    def rotate_right(self, arr):
+        if len(arr) <= 1:
+            return arr
+        last_element = arr[-1]
+        for i in range(len(arr)-1, 0, -1):
+            arr[i] = arr[i-1]
+        arr[0] = last_element
+        return arr
+s = Solution()
+arr = [1,2,3,4,5]
+print(s.rotate_right(arr))
+
+
+# Rotating array by one position left side
+class Solution:
+    def rotate_left(self, arr):
+        if len(arr) <= 1:
+            return arr
+        first_element = arr[0]
+        for i in range(len(arr)-1):
+            arr[i] = arr[i+1]
+        arr[-1] = first_element
+        return arr
+
+s = Solution()
+arr = [1,2,3,4,5]
+print(s.rotate_left(arr))
