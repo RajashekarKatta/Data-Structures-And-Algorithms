@@ -133,7 +133,7 @@ class Solution:
         if len(arr) <= 1:
             return arr
         first_element = arr[0]
-        for i in range(len(arr)-1):
+        for i in range(len(arr)-1):    # This Step is more imporatnt "(len(arr)-1)"
             arr[i] = arr[i+1]
         arr[-1] = first_element
         return arr
@@ -141,3 +141,55 @@ class Solution:
 s = Solution()
 arr = [1,2,3,4,5]
 print(s.rotate_left(arr))
+
+
+# # Remove duplicates from Sorted Array
+# Given a sorted array arr[] of size n, the goal is to rearrange the array so that all distinct elements appear at the beginning in sorted order. Additionally, return the length of this distinct sorted subarray.
+# Note: The elements after the distinct ones can be in any order and hold any value, as they don't affect the result.
+# Input: arr[] = [1, 2, 2, 3, 4, 4, 4, 5, 5]
+# Output: [1, 2, 3, 4, 5]
+class Solution:
+    def remove_duplicates(self, arr):
+        i = 0
+        for j in range(len(arr)):
+            if arr[j] != arr[i]:
+                i += 1
+                arr[i] = arr[j]
+        return arr[:i+1]
+
+s = Solution()
+arr =[1, 2, 2, 3, 4, 4, 4, 5, 5]
+print(s.remove_duplicates(arr))
+
+
+# Remove duplicates from undorted array
+class Solution:
+    def remove_duplicates_unsorted(self, arr):
+        seen = set()
+        result = []
+        for num in arr:
+            if num not in seen:
+                result.append(num)
+                seen.add(num)
+        return result
+s = Solution()
+arr = [1, 2, 2, 3, 4, 4, 4, 5, 5]
+print(s.remove_duplicates_unsorted(arr))
+
+
+# # # Generating All Subarrays
+# Given an array arr[], the task is to generate all the possible subarrays of the given array.
+# Input: arr[] = [1, 2, 3] -> Output: [ [1], [1, 2], [2], [1, 2, 3], [2, 3], [3] ]
+class Solution:
+    def generate_subarrays(self, arr):
+        result = []
+        for i in range(len(arr)):
+            for j in range(i, len(arr)):
+                result.append(arr[i:j+1])          # important step arr[i:j+1] and return result
+        return result
+s = Solution()
+arr = [1,2,3]
+print(s.generate_subarrays(arr))
+
+
+
