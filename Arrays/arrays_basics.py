@@ -528,3 +528,53 @@ s = Solution()
 arr = [10, 5, 3, 4, 3, 5, 6]
 print(s.first_repeat_ele(arr))
 
+
+# Two Sum problem  # here we are returning numbers
+class Solution:
+    def two_sum(self ,arr, target):
+        hash_map = {}
+        for i, num in enumerate(arr):
+            compliment = target - num
+            if compliment in hash_map:
+                return [compliment, num]
+            hash_map[num] = i
+s = Solution()
+arr = [2, 7, 11, 15]
+target = 9
+print(s.two_sum(arr, target))
+
+
+# Two Sum Problem 
+class Solution:
+    def two_sum(self, arr, target):
+        hash_map = {}
+        for i, num in enumerate(arr):
+            compliment = target - num
+            if compliment in hash_map:
+                return [hash_map[compliment], i]     # Here we are returning indexes
+            hash_map[num] = i
+
+s = Solution()
+arr = [2, 7, 11, 15]
+print(s.two_sum(arr, target))
+
+
+# If Given arr is sorted find the two pair sum
+class Solution:
+    def two_sum_sorted(self, arr, target):
+        left, right = 0, len(arr) - 1
+        current_sum = 0
+        result = []
+        while left < right:
+            current_sum = arr[left] + arr[right]
+            if current_sum == target:
+                return arr[left], arr[right]             # if you want index numbers write "return left, right"
+            elif current_sum < target:
+                left += 1
+            else:
+                right -= 1
+
+s = Solution()
+arr = [2, 7, 11, 15]
+print(s.two_sum_sorted(arr, 9))
+
