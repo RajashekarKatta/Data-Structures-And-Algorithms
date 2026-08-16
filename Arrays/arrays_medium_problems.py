@@ -116,3 +116,60 @@ s = Solution()
 arr = [7, 10, 1, 3, 6, 9, 2]
 print(s.stock_buy_sell(arr))
 
+
+# Majority Element
+# Given an array arr[] of size n, find the element that appears more than ⌊n/3⌋ times. If no such element exists, return -1.
+# Input: arr[] = [1, 1, 2, 1, 3, 5, 1] --> Output: 1
+class Solution:
+    def majority_element(self, arr, n):
+        element1 = element2 = None
+        count1 = count2 = 0
+        for num in arr:
+            if element1 == num:
+                count1 += 1
+            elif element2 == num:
+                count2 += 1
+            elif count1 == 0:
+                element1 = num
+                count1 = 1
+            elif count2 == 0:
+                element2 = num
+                count2 = 1
+            else:
+                count1 -= 1
+                count2 -= 1
+        result = []
+        n = len(arr)
+        for element in [element1, element2]:
+            if element is not None and arr.count(element) > n//3:
+                result.append(element)
+        return result
+s = Solution()
+arr = [1, 1, 2, 1, 3, 5, 1]
+print(s.majority_element(arr, 3))
+
+# Majority Element
+# Given an array arr[] of size n, find the element that appears more than ⌊n/2⌋ times. If no such element exists, return -1.
+# Input: arr[] = [1, 1, 2, 1, 3, 5, 1] --> Output: 1
+class Solution:
+    def majority_ele(self, arr, n):
+        element1 = None
+        count1 = 0
+        for num in arr:
+            if element1 == num:
+                count1 += 1
+            elif count1 == 0:
+                element1 = num
+                count1 = 1
+            else:
+                count1 -= 1
+        result = []
+        n = len(arr)
+        if element1 is not None and arr.count(element1) > n // 2 :
+            result.append(element1)
+        return result
+s = Solution()
+arr = [1, 1, 2, 1, 3, 5, 1]
+print(s.majority_ele(arr, 2))
+
+
