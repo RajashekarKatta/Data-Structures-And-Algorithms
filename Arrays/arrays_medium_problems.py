@@ -76,3 +76,43 @@ class Solution:
 s = Solution()
 arr = [2, -3, 4, 1, 1, 7]
 print(s.smallest_missing_number(arr))
+
+
+# Stock Buy and Sell - Multiple Transaction Allowed
+# Given an array prices[] representing stock prices, find the maximum total profit that can be earned by buying and selling the stock any number of times.
+# Note: We can only sell a stock which we have bought earlier and we cannot hold multiple stocks on any day.
+# Input: prices[] = [100, 180, 260, 310, 40, 535, 695]  --> Output: 865
+class Solution:
+    def max_profit(Self, arr):
+        profit = 0
+        for i in range(1, len(arr)):
+            if arr[i] > arr[i-1]:
+                profit += arr[i] - arr[i-1]
+        return profit
+
+s = Solution()
+arr = [100, 180, 260, 310, 40, 535, 695]
+print(s.max_profit(arr))
+
+
+# Stock Buy and Sell - Max one Transaction Allowed
+# Given an array prices[] of non-negative integers, representing the prices of the stocks on different days, find the maximum profit possible by buying 
+# and selling the stocks on different days when at most one transaction is allowed. Here one transaction means 1 buy + 1 Sell. 
+# If it is not possible to make a profit then return 0.
+# Note: Stock must be bought before being sold.
+# Input: prices[] = [7, 10, 1, 3, 6, 9, 2] -- > Output: 8
+class Solution:
+    def stock_buy_sell(self, prices):
+        min_price = prices[0]
+        max_profit = 0
+        for price in prices:
+            if price < min_price:
+                min_price = price
+            profit = price - min_price
+            if profit > max_profit:
+                max_profit = profit
+        return max_profit
+s = Solution()
+arr = [7, 10, 1, 3, 6, 9, 2]
+print(s.stock_buy_sell(arr))
+
