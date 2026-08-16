@@ -173,3 +173,35 @@ arr = [1, 1, 2, 1, 3, 5, 1]
 print(s.majority_ele(arr, 2))
 
 
+# Maximum Subarray Sum - Kadane's Algorithm
+# Given an integer array arr[], find the subarray (containing at least one element) which has the maximum possible sum, and return that sum.
+class Solution:
+    def max_subarray_sum(self, arr):
+        max_so_far = arr[0]
+        current_sum = arr[0]
+        for i in range(1, len(arr)):
+            current_sum = max(arr[i], current_sum + arr[i])
+            max_so_far = max(max_so_far, current_sum)
+        return f"Maximum Subarray Sum: {max_so_far}"
+s = Solution()
+arr = [2, 3, -8, 7, -1, 2, 3]
+print(s.max_subarray_sum(arr))
+
+
+# MAximum Subarray product - "Kadanes Algorithm"
+class Solution:
+    def max_subarr_product(self, arr):
+        max_product = arr[0]
+        min_product = arr[0]
+        result = arr[0]
+        for i in range(1, len(arr)):
+            if arr[i] < 0:
+                   max_product, min_product = min_product, max_product
+            max_product = max(arr[i], max_product * arr[i])
+            min_product = min(arr[i], min_product*arr[i])
+            result = max(result, max_product)
+        return f"Maximum subarray Product: {result}"
+s = Solution()
+arr = [2, 3, -2, 4]
+print(s.max_subarr_product(arr))
+        
