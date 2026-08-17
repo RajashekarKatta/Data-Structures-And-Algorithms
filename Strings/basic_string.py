@@ -244,3 +244,44 @@ class Solution:
 
 a = Solution()
 print(a.are_anagrams("geeks", "kseeg"))
+
+
+# Using Dictionary - O(n + m) Time and O(1) Space
+class Solution:
+    def are_angram(self, s1, s2):
+        freq = {}
+        for char in s1:
+            freq[char] = freq.get(char, 0) + 1
+        for char in s2:
+            freq[char] = freq.get(char, 0) - 1
+        for char in freq.values():
+            if char != 0:
+                return False
+        return True
+a = Solution()
+print(a.are_angram("geeks", "kseeg"))
+
+
+# Check if two strings are k-anagrams or not
+# Given two strings of lowercase alphabets and a value k, the task is to find if two strings are K-anagrams of each other or not.
+# Note: Two strings are called k-anagrams if the following two conditions are true. 
+# Both have same number of characters.
+# Two strings can become anagram by changing at most k characters in a string.
+class Solution:
+    def check_k_anagrams(self, s1, s2, k):
+        if len(s1) != len(s2):
+            return False
+        freq = [0] * 26
+        for char in s1:
+            freq[ord(char)- ord('a')] += 1
+        for char in s2:
+            freq[ord(char)- ord('a')] -= 1
+
+        changing_count = 0
+        for i in freq:
+            if i > 0:
+                changing_count += i
+        return changing_count <= k
+a = Solution()
+print(a.check_k_anagrams("anagram", "grammar", 3))
+
