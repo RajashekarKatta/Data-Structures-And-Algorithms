@@ -121,3 +121,18 @@ class Solution:
 a = Solution()
 print(a.kth_non_repeating_char("geeksforgeeks", 3))
 
+
+# Add n binary strings
+# Given n binary strings, the task is to find their sum which is also a binary string.
+# Input:  arr[] = ["1101", "111"]
+# Output: "10100"
+class Solution:
+    def sum_of_binary(self, arr):
+        total_sum = 0
+        for s in arr:
+            total_sum += int(s, 2)
+        return str(bin(total_sum)[2:])
+
+a = Solution()
+arr = ["1101", "111"]
+print(a.sum_of_binary(arr))
