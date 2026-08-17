@@ -143,3 +143,34 @@ a = Solution()
 print(a.camel_case("i got intern in geeksforgeeks"))
 
 
+# Count of substrings that start and end with 1 in given Binary String
+class Solution:
+    def binary_substring(self, s):
+        count = 0
+        for char in s:
+            if char =="1":
+                count += 1
+        n = count
+        return (n * (n-1))//2            # here we are using (n * (n - 1)) // 2 not n+1
+a = Solution()
+print(a.binary_substring("10011"))
+
+
+# Check if given String is Pangram or not
+# Given a string s, check if it is Pangram or not. 
+# A pangram is a sentence containing all letters of the English Alphabet.
+# Input: s = "The quick brown fox jumps over the lazy dog" --> Output: true
+class Solution:
+    def check_panagram(self, s):
+        freq = [0] * 26
+        for char in s:
+            if 'A' <= char <= 'Z':
+                freq[ord(char) - ord('A')] += 1
+            elif 'a' <= char <= 'z':
+                freq[ord(char) - ord('a')] += 1
+        for char in freq:
+            if char == 0:
+                return False
+        return True
+a = Solution()
+print(a.check_panagram("The quick brown fox jumps over lazy dog"))
