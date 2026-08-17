@@ -285,3 +285,5 @@ class Solution:
 a = Solution()
 print(a.check_k_anagrams("anagram", "grammar", 3))
 
+
+
