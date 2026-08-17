@@ -174,3 +174,73 @@ class Solution:
         return True
 a = Solution()
 print(a.check_panagram("The quick brown fox jumps over lazy dog"))
+
+
+# Palindrome String
+# Given a string s, the task is to check if it is palindrome or not.
+# Input: s = "abba"  -->  Output: true
+class Solution:
+    def is_palindrome(self, s):
+        s = list(s)
+        left, right = 0, len(s) -1
+        while left < right:
+            if s[left] != s[right]:
+                return False
+            left += 1
+            right -= 1
+        return True
+a = Solution()
+print(a.is_palindrome("malayalam"))
+
+
+# Check if a string is substring of another
+# Given two strings txt and pat, the task is to find if pat is a substring of txt. If yes, return the index of the first occurrence, else return -1.
+# Input: txt = "geeksforgeeks", pat = "eks" --> Output: 2
+class Solution:
+    def check_substring(self, txt, pat):
+        n = len(txt)
+        m = len(pat)
+        for i in range(n-m+1):
+            if txt[i:i+m] == pat:
+                return i
+        return -1
+a = Solution()
+print(a.check_substring("geeksfogeeks", "eks"))
+
+
+# Check if one string is subsequence of other
+# Given two strings s1 and s2, find if the first string is a Subsequence of the second string, i.e. if s1 is a subsequence of s2.  
+# A subsequence is a sequence that can be derived from another sequence by deleting some elements without changing the order of the remaining elements.
+# Input: s1 = "AXY", s2 = "ADXCPY" --> Output: true 
+class Solution:
+    def is_subsequence(self, s1, s2):
+        i, j = 0, 0
+        while i < len(s1) and j < len(s2):
+            if s1[i] == s2[j]:
+                i += 1
+            j += 1
+        return i == len(s1)
+a = Solution()
+print(a.is_subsequence("AXY", "ADXCPY"))
+
+
+
+# Check if two Strings are Anagrams of each other
+# Given two non-empty strings s1 and s2 of lowercase letters, determine if they are anagrams — i.e., if they contain the same characters with the same frequencies.
+# Input: s1 = “geeks”  s2 = “kseeg” --> Output: true
+class Solution:
+    def are_anagrams(self, s1, s2):
+        if len(s1) != len(s2):
+            return False
+        freq = [0] * 26
+        for char in s1:
+            freq[ord(char)- ord('a')] += 1
+        for char in s2:
+            freq[ord(char)- ord('a')] -= 1
+        for char in freq:
+            if freq[char] != 0:
+                return False
+        return True
+
+a = Solution()
+print(a.are_anagrams("geeks", "kseeg"))
