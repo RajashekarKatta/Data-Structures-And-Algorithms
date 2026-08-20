@@ -45,7 +45,31 @@ a = Solution()
 print(a.first_non_repeating_char("geeksforgeeks"))
 
 
-# # Reverse a string preserving space positions
+
+
+# K'th Non-repeating Character
+# Given a string str of length n (1 <= n <= 106) and a number k, the task is to find the kth non-repeating character in the string.
+# Input : str = geeksforgeeks, k = 3
+# Output : r                            k means third non-repeating character is 'r', first nonprepeat char is 'f', second nonrepeatchar is 'o' and third non repeat char is 'r' our answer.
+class Solution:
+    def kth_non_repeating_char(self, s, k):
+        freq = [0] * 26
+        for char in s:
+            freq[ord(char) - ord('a')] += 1
+
+        non_repeat = 0
+        for char in s:
+            if freq[ord(char) - ord('a')] == 1:
+                non_repeat += 1
+            if non_repeat == k:
+                return f"K'th Non-repeating character is '{char}'"
+a = Solution()
+print(a.kth_non_repeating_char("geeksforgeeks", 3))
+
+
+
+
+# Reverse a string preserving space positions
 # Given a string s, the task is to reverse the given string while preserving the position of spaces.
 # Input: "internship at geeks for geeks"
 # Output: skeegrofsk ee gtapi hsn retni
@@ -102,26 +126,6 @@ a = Solution()
 print(a.first_repeating_character("geeksforgeeks"))
 
 
-# K'th Non-repeating Character
-# Given a string str of length n (1 <= n <= 106) and a number k, the task is to find the kth non-repeating character in the string.
-# Input : str = geeksforgeeks, k = 3
-# Output : r
-class Solution:
-    def kth_non_repeating_char(self, s, k):
-        freq = [0] * 26
-        for char in s:
-            freq[ord(char) - ord('a')] += 1
-
-        non_repeat = 0
-        for char in s:
-            if freq[ord(char) - ord('a')] == 1:
-                non_repeat += 1
-            if non_repeat == k:
-                return f"K'th Non-repeating character is '{char}'"
-a = Solution()
-print(a.kth_non_repeating_char("geeksforgeeks", 3))
-
-
 # Add n binary strings
 # Given n binary strings, the task is to find their sum which is also a binary string.
 # Input:  arr[] = ["1101", "111"]
@@ -136,3 +140,47 @@ class Solution:
 a = Solution()
 arr = ["1101", "111"]
 print(a.sum_of_binary(arr))
+
+
+
+# Multiply Large Numbers represented as Strings
+# Given two numbers as strings s1 and s2, calculate their product.
+# Note: The numbers can be negative. There can be zeros in the beginning of the numbers.
+# Input: s1 = "0033", s2 = "2"  -->  Output: "66" --> Explanation: 33 * 2 = 66
+class Solution:
+    def multiply_strings(self, s1, s2):
+        if s1 == 0 and s2 == 0:
+            return 0
+        s1 = int(s1)
+        s2 = int(s2)
+        total = s1 * s2
+        return total
+a = Solution()
+print(a.multiply_strings("0033", "2"))
+
+
+# Isomorphic Strings Check
+# Given two strings s1 and s2 of equal length, consisting only of lowercase English letters, determine if they are isomorphic.
+# Two strings are isomorphic if characters in s1 can be replaced to get s2 such that:
+# Each character in s1 maps to a unique character in s2.
+# The mapping is consistent throughout the string.
+# The order of characters is preserved. -->   Input: s1 = "aab", s2 = "xxy"  ->  Output: true
+class Solution:
+    def isomorphic_string(self, s1, s2):
+        if len(s1) != len(s2): 
+            return False
+        map_s1 ={}
+        map_s2 = {}
+        for i in range(len(s1)):
+            if s1[i] not in map_s1:
+                map_s1[s1[i]] = i
+            if s2[i] not in map_s2:
+                map_s2[s2[i]] = i
+
+            if map_s1[s1[i]] != map_s2[s2[i]]:
+                return False
+        return True
+
+a = Solution()
+print(a.isomorphic_string("aab", "xxy"))       
+
