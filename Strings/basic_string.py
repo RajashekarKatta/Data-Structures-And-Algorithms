@@ -219,7 +219,7 @@ class Solution:
             if s1[i] == s2[j]:
                 i += 1
             j += 1
-        return i == len(s1)
+        return i == len(s1)                 # Here len(s1) == 3 and  i == 3 that means 'True' 
 a = Solution()
 print(a.is_subsequence("AXY", "ADXCPY"))
 
@@ -238,7 +238,7 @@ class Solution:
         for char in s2:
             freq[ord(char)- ord('a')] -= 1
         for char in freq:
-            if freq[char] != 0:
+            if char != 0:
                 return False
         return True
 
@@ -284,6 +284,4 @@ class Solution:
         return changing_count <= k
 a = Solution()
 print(a.check_k_anagrams("anagram", "grammar", 3))
-
-
 
