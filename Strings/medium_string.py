@@ -177,10 +177,13 @@ class Solution:
             if s2[i] not in map_s2:
                 map_s2[s2[i]] = i
 
-            if map_s1[s1[i]] != map_s2[s2[i]]:
+            if map_s1[s1[i]] != map_s2[s2[i]]:          # here this line is more important to understand
                 return False
         return True
 
 a = Solution()
-print(a.isomorphic_string("aab", "xxy"))       
+print(a.isomorphic_string("aab", "xxy"))  
+
+
+
 
