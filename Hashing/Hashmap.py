@@ -56,6 +56,26 @@ a = [11, 1, 13, 21, 3, 7]
 b = [11, 3, 7, 1] 
 print(s.is_subset(a, b))
 
+
+
+# Check for Disjoint Arrays or Sets
+# Given two arrays a[] and b[], check if they are disjoint, i.e., there is no element common between both the arrays.
+# Examples:Input: a[] = [12, 34, 11, 9, 3], b[] = [2, 1, 3, 5] --> Output: False
+class Solution:
+    def are_disjoint(self, a, b):
+        hash_set = set(a)
+        for num in b:
+            if num in hash_set:
+                return False
+        return True
+
+s = Solution()
+a = [12, 34, 11, 9, 3]
+b = [2, 1, 3, 5]
+print(s.are_disjoint(a, b))
+
+
+
 # Hashmap using dictionary in python
 # Hashmap + Dictionary using sliding window technique to find the longest substring with sum K Problem
 class Solution:
