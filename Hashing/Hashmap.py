@@ -58,7 +58,7 @@ print(s.is_subset(a, b))
 
 
 
-# Check for Disjoint Arrays or Sets
+# Check for Disjoint Arrays or Sets ---> Two arrays are disjoint if they have no common element.
 # Given two arrays a[] and b[], check if they are disjoint, i.e., there is no element common between both the arrays.
 # Examples:Input: a[] = [12, 34, 11, 9, 3], b[] = [2, 1, 3, 5] --> Output: False
 class Solution:
@@ -73,6 +73,51 @@ s = Solution()
 a = [12, 34, 11, 9, 3]
 b = [2, 1, 3, 5]
 print(s.are_disjoint(a, b))
+
+
+# Check if two arrays are equal or not
+# Given two arrays, a[] and b[] of equal length. The task is to determine if the given arrays are equal or not. Two arrays are considered equal if:
+# Both arrays contain the same set of elements.
+# The arrangements (or permutations) of elements may be different.
+# If there are repeated elements, the counts of each element must be the same in both arrays.
+# Input: a[] = [1, 2, 5, 4, 0], b[] = [2, 4, 5, 0, 1] -->  Output: true
+class Solution:
+    def are_equal(self, a, b):
+        if len(a) != len(b):
+            return False
+        
+        freq = {}
+        for num in a:
+            freq[num] = freq.get(num, 0) + 1
+        for num in b:
+            freq[num] = freq.get(num, 0) - 1
+
+        for num in freq:
+            if freq[num] != 0:
+                return False
+        return True
+
+s = Solution()
+a = [1, 2, 5, 4, 0]
+b = [2, 4, 5, 0, 1]
+print(s.are_equal(a, b))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
