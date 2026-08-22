@@ -123,6 +123,25 @@ s = Solution()
 print(s.fizz_buzz(7))
 
 
+# Max Distance Between Two Occurrences
+# Given an array arr[], the task is to find the maximum distance between two occurrences of any element. If no element occurs twice, return 0.
+# Input: arr = [1, 1, 2, 2, 2, 1] --> Output: 5
+# Explanation: distance for 1 is: 5-0 = 5, distance for 2 is: 4-2 = 2, So max distance is 5.
+class Solution:
+    def max_distance(self, arr):
+        max_distance = 0
+        hash_map = {}
+        for i in range(len(arr)):
+            if arr[i] not in hash_map:
+                hash_map[arr[i]] = i
+
+            else:
+                max_distance = max(max_distance, i - hash_map[arr[i]])
+        return max_distance
+
+s = Solution()
+arr = [1, 1, 2, 2, 2, 1]
+print(s.max_distance(arr))
 
 
 
