@@ -1,3 +1,61 @@
+# Hashing is a Data Structure technique designed to insert, delete and search data in average constant time O(1). 
+# it maps large variable sized input values into fixed size integer indices using a mathematical formula called a Hashing Function then stores the record in hash Table
+# We use hashing for dictionaires, frequency counting, maintaining data for quick access by key etc. 
+
+
+# There are mainly two forms of hash typically implemented in programming languages.
+# Hash Set : Collection of unique keys.
+# Hash Map : Collection of key value pairs with keys being unique.
+
+
+# Hash Functions
+# A hash function is function that takes an input() of arbitrary size and converts it into - fixed size value, called a hash value or hash code.
+# For example, using the modulo method:
+# H(x) = x % 10
+
+
+# Types of Hash Functions
+# 1. Division Method
+# 2. Multiplication Method  etc..
+
+# Division Method
+def integer_hash(key:int, table_size: int = 10) -> int:
+    return key % table_size             # we use division method when we are working with integers(arrays)
+
+
+def string_hash(s: str, table_size: int = 10) -> int:
+    primes = 31
+    hash_value = 0
+    for char in s:
+        hash_value = (hash_value * primes + ord(char)) % table_size
+    return hash_value
+
+
+# multiplication method
+import math
+def multiplication_hash(key: int, table_size: int = 100) -> int:
+    A = (math.sqrt(5) - 1) / 2 
+    fractional_part = (key * A) % 1
+    index = math.floor(table_size * fractional_part)
+    return index
+
+# Check if an array is subset of another array
+# Given two arrays a[] and b[] of size m and n respectively, the task is to determine whether b[] is a subset of a[]. 
+# Both arrays are not sorted, and elements are distinct.  Input: a[] = [11, 1, 13, 21, 3, 7], b[] = [11, 3, 7, 1] 
+# Output: true
+class Solution:
+    def is_subset(self, a, b):
+        hash_set = set(a)
+        for num in b:
+            if num not in hash_set:
+                return False
+        return True
+
+s = Solution()
+a = [11, 1, 13, 21, 3, 7]
+b = [11, 3, 7, 1] 
+print(s.is_subset(a, b))
+
 # Hashmap using dictionary in python
 # Hashmap + Dictionary using sliding window technique to find the longest substring with sum K Problem
 class Solution:
