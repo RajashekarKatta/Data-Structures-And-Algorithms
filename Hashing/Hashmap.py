@@ -103,8 +103,24 @@ b = [2, 4, 5, 0, 1]
 print(s.are_equal(a, b))
 
 
+# Fizz Buzz
+class Solution:
+    def fizz_buzz(self, n):
+        result = []
+        hash_map = {3:"Fizz", 5:"Buzz"}
+        divisors = [3, 5]
+        for i in range(1, n+1):
+            s = ""
+            for d in divisors:
+                if i % d == 0:
+                    s += hash_map[d]
+            if not s:
+                s += str(i)
+            result.append(s)
+        return result
 
-
+s = Solution()
+print(s.fizz_buzz(7))
 
 
 
