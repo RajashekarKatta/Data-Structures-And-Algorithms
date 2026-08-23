@@ -109,7 +109,7 @@ class Solution:
         result = []
         hash_map = {3:"Fizz", 5:"Buzz"}
         divisors = [3, 5]
-        for i in range(1, n+1):
+        for i in range(1, n+1):     # here we are taking starting range 1 because expected result started from 1.
             s = ""
             for d in divisors:
                 if i % d == 0:
@@ -134,7 +134,6 @@ class Solution:
         for i in range(len(arr)):
             if arr[i] not in hash_map:
                 hash_map[arr[i]] = i
-
             else:
                 max_distance = max(max_distance, i - hash_map[arr[i]])
         return max_distance
@@ -144,8 +143,45 @@ arr = [1, 1, 2, 2, 2, 1]
 print(s.max_distance(arr))
 
 
+# Duplicate within K Distance in an Array
+# Given an integer array arr[] and an integer k, determine whether there exist two indices i and j such that arr[i] == arr[j] and |i - j| ≤ k. 
+# If such a pair exists, return 'Yes', otherwise return 'No'. --> Input: k = 3, arr[] = [1, 2, 3, 4, 1, 2, 3, 4]  -->  Output: No
+# Explanation: Each element in the given array arr[] appears twice and the distance between every element and its duplicate is 4.
+class Solution:
+    def duplicate_within_k_distance(self, arr, k):
+        last_seen = {}
+        for i, num in enumerate(arr):
+            if num in last_seen:
+                if (i - last_seen[num]) <= k:
+                    return "yes"
+            last_seen[num] = i
+        return "No"
+
+s = Solution()
+arr = [1, 2, 3, 4, 1, 2, 3, 4]
+print(s.duplicate_within_k_distance(arr, 3))
 
 
+# Another hash method using hash_set to find the answer
+class Solution:
+    def duplicate_within_k(self, arr, k):
+        hash_set = set()
+        for i in range(len(arr)):
+            if arr[i] in hash_set:
+                return True
+            hash_set.add(arr[i])
+
+            if (i >= k):
+                hash_set.remove(arr[i-k])
+        return False
+
+if __name__ == "__main__":
+    s = Solution()
+    arr = [10, 5, 3, 4, 3, 5, 6]
+    if s.duplicate_within_k(arr, 3):
+        print("Yes")
+    else:
+        print("No")
 
 
 
