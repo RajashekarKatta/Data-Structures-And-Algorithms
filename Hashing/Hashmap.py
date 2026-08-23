@@ -338,236 +338,41 @@ arr = [1, 3, 2, 3, 4]
 print(s.find_repeating_ele(arr))
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# Missing Element in Range
+# Given an array arr[] of integers and a range [low, high], find all the numbers within the range that are not present in the array. return the missing numbers in sorted order.
+# Input: arr[] = [10, 12, 11, 15], low = 10, high = 15   --> Output: [13, 14]
+# Explanation: Numbers 13 and 14 lie in the range [10, 15] but are not present in the array.
+class Solution:
+    def missing_element_range(self, arr, low, high):
+        hash_set = set(arr)
+        res = []
+        i = low
+        while i <= high:
+            if i not in hash_set:
+                res.append(i)
+            i += 1
+        return res
+s = Solution()
+arr = [10, 12, 11, 15]
+low = 10
+high = 15
+print(s.missing_element_range(arr, low, high))
+        
+# We can also write code using for loop
+class Solution:
+    def missing_ele_range(self, arr, low, high):
+        hash_set = set(arr)
+        res = []
+        for i in range(low, high + 1):
+            if i not in hash_set:
+                res.append(i)
+
+        return res
+s = Solution()
+arr = [10, 12, 11, 15]
+low = 10
+high = 15
+print(s.missing_ele_range(arr, low, high))
 
 
 
