@@ -215,7 +215,7 @@ class Solution:
         for num in a:
             if num not in hash_set:
                 hash_set.add(num)
-                
+
         for num in b:
             if num not in hash_set:
                 hash_set.add(num)
@@ -228,17 +228,71 @@ b = [4, 5, 6]
 print(s.union_of_arrays(a, b))
 
 
+# Most frequent in an array
+# Given an integer array arr[], find the element that appears most frequently. If multiple elements have the same highest frequency, return the largest among them.
+# Input : arr[] = [1, 3, 2, 1, 4, 1]  --> Output : 1
+# Explanation: 1 appears three times in array which is maximum frequency.
+class Solution:
+    def frequency_of_arr(self, arr):
+        freq = {}
+        for num in arr:
+            freq[num] = freq.get(num, 0) + 1
+
+        max_freq = 0
+        result = 0
+        for num in freq:
+            if freq[num] > max_freq:
+                max_freq = freq[num]
+
+            elif freq[num] == max_freq and num > result:
+                result = num
+        return result
+
+s = Solution()
+arr = [1, 2, 2, 4, 1]
+print(s.frequency_of_arr(arr))
 
 
+# Two Sum - Pair with given Sum
+# Given an array arr[] of n integers and a target value, check if there exists a pair whose sum equals the target. This is a variation of the 2-Sum problem.
+# Input: arr[] = [0, -1, 2, -3, 1], target = -2 -->  Output: true
+# Explanation: There is a pair (1, -3) with the sum equal to given target, 1 + (-3) = -2.
+class Solution:
+    def Two_Sum(self, arr, target):
+        hash_set = set()
+        for num in arr:
+            compliment = target - num
+            if compliment in hash_set:
+                return True
+            hash_set.add(num)
+
+        return False
+
+s = Solution()
+arr = [0, -1, 2, -3, 1]
+target = -2
+print(s.Two_Sum(arr, target))
 
 
+# 2 Sum - Count pairs with given sum
+# Given an array arr[] of n integers and a target value, find the number of pairs of integers in the array whose sum is equal to target.
+# Input: arr[] = [1, 5, 7, -1, 5], target = 6 --> Output:  3
+# Explanation: Pairs with sum 6 are (1, 5), (7, -1) & (1, 5).  
+class Solution:
+    def two_sum_pairs(self, arr, target):
+        freq = {}
+        count = 0
+        for num in arr:
+            compliement = target - num
+            if compliement in freq:
+                count += freq[compliement]
 
+            freq[num] = freq.get(num, 0) + 1
+        return count
 
-
-
-
-
-
+s = Solution()
+arr = [1, 5, 7, -1, 5]
+print(s.two_sum_pairs(arr, 6))
 
 
 
