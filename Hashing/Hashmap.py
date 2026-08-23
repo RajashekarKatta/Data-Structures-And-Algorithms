@@ -281,25 +281,61 @@ print(s.Two_Sum(arr, target))
 class Solution:
     def two_sum_pairs(self, arr, target):
         freq = {}
-        count = 0
+        pair_count = 0
         for num in arr:
             compliement = target - num
             if compliement in freq:
-                count += freq[compliement]
+                pair_count += freq[compliement]
 
             freq[num] = freq.get(num, 0) + 1
-        return count
+        return pair_count
 
 s = Solution()
 arr = [1, 5, 7, -1, 5]
 print(s.two_sum_pairs(arr, 6))
 
 
+# Count pairs with absolute difference equal to k
+# Given an array arr[] and a positive integer k, the task is to count all pairs (i, j) such that i < j and absolute value of (arr[i] - arr[j]) is equal to k. 
+# Input: arr[] = [1, 4, 1, 4, 5], k = 3  --> Output: 4
+# Explanation: There are 4 pairs with absolute difference 3, the pairs are [1, 4], [1, 4], [1, 4] and [4, 1]
+class Solution:
+    def count_pairs_with_difference_k(self, arr, k):
+        hash_map = {}
+        pair_count = 0
+        for num in arr:
+            if num - k in hash_map:                 # Bellow steps are important for this problem
+                pair_count += hash_map[num-k]
+
+            if num + k in hash_map:
+                pair_count += hash_map[num + k]
+
+            hash_map[num] = hash_map.get(num, 0) + 1
+
+        return pair_count
+
+s = Solution()
+arr = [1, 4, 1, 4, 5]
+k = 3
+print(s.count_pairs_with_difference_k(arr, k))
 
 
+# Only Repeating From 1 To n-1
+# Given an array arr[] of size n filled with numbers from 1 to n-1 in random order. The array has only one repetitive element. The task is to find the repetitive element.
+# Input: arr[] = [1, 3, 2, 3, 4]
+# Explanation: The number 3 is the only repeating element.
+class Solution:
+    def find_repeating_ele(self, arr):
+        hash_set = set()
+        for num in arr:
+            if num in hash_set:
+                return f"Repeating element in given array {num}"
+            hash_set.add(num)
+        return None
 
-
-
+s = Solution()
+arr = [1, 3, 2, 3, 4]
+print(s.find_repeating_ele(arr))
 
 
 
