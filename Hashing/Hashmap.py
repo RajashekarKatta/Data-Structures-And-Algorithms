@@ -172,7 +172,7 @@ class Solution:
             hash_set.add(arr[i])
 
             if (i >= k):
-                hash_set.remove(arr[i-k])
+                hash_set.remove(arr[i-k])           # this step is most important
         return False
 
 if __name__ == "__main__":
@@ -182,6 +182,313 @@ if __name__ == "__main__":
         print("Yes")
     else:
         print("No")
+
+
+# Intersection of two Arrays
+# Given two arrays a[] and b[], find their intersection — the unique elements that appear in both. Ignore duplicates, and the result can be in any order.
+# Input: a[] = [1, 2, 1, 3, 1], b[] = [3, 1, 3, 4, 1]  --> Output: [1, 3]
+# Explanation: 1 and 3 are the only common elements and we need to print only one occurrence of common elements
+class Solution:
+    def intersection_of_arrays(self, a, b):
+        hash_set = set(a)
+        res = []
+        for num in b:
+            if num in hash_set:
+                res.append(num)
+                hash_set.remove(num)            # Erase it from sa to avoid duplicates
+        return res
+
+s = Solution()
+a = [1, 2, 1, 3, 1]
+b = [3, 1, 3, 4, 1]
+print(s.intersection_of_arrays(a,b))
+
+
+# Union of Two Arrays
+# Given two arrays a[] and b[], Return union of both the arrays in any order.
+# Note: Union of two arrays is an array having all distinct elements that are present in either array.
+# Input : a[] = [1, 2, 3], b[] = [4, 5, 6],  Output : [1, 2, 3, 4, 5, 6]
+# Explanation: 1, 2, 3, 4, 5 and 6 are the elements present in either array.
+class Solution:
+    def union_of_arrays(self, a, b):
+        hash_set = set()
+        for num in a:
+            if num not in hash_set:
+                hash_set.add(num)
+                
+        for num in b:
+            if num not in hash_set:
+                hash_set.add(num)
+
+        return list(hash_set)
+
+s = Solution()
+a = [1, 2, 3]
+b = [4, 5, 6]
+print(s.union_of_arrays(a, b))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
