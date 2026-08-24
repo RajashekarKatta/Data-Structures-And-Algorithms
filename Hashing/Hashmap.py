@@ -375,15 +375,86 @@ high = 15
 print(s.missing_ele_range(arr, low, high))
 
 
+# Missing Elements of a Range in an Array
+# Given an array arr[] of size n, let min and max be the minimum and maximum elements in the array respectively. 
+# Find how many numbers should be added so that every element in the range [min, max] occurs at least once in the array.
+# input : arr[] = [4, 5, 3, 8, 6] --> Output : 1
+# Explanation: Range is 3-8; only 7 is missing, so count = 1.
+class Solution:
+    def missing_ele_count(self, arr):
+        hash_set = set(arr)
+        count = 0
+        min_value = min(arr)
+        max_value = max(arr)
+        for i in range(min_value, max_value+1):
+            if i not in hash_set:
+                count += 1
+        return count
+
+s = Solution()
+arr = [4, 5, 3, 8, 6]
+print(s.missing_ele_count(arr))
 
 
+# Minimum Subsets with Distinct Elements
+# You are given an array of n-element. You have to make subsets from the array such that no subset contain duplicates. Find out minimum number of subset possible.
+# Input : arr[] = {1, 2, 3, 4}  --> Output :1
+# Explanation : A single subset can contains all values and all values are distinct.
+class Solution:
+    def min_subset_with_distinct_ele(self, arr):
+        freq = {}
+        for num in arr:
+            freq[num] = freq.get(num, 0) + 1
+
+        result = max(freq.values())
+        return f"Distinct subset count: {result}"
+
+s = Solution()
+arr = [1,2,3,3]
+print(s.min_subset_with_distinct_ele(arr))
 
 
+# Another way to find the answer
+class Solution:
+    def minimum_subset_with_distinct_ele(self, arr):
+        freq = {}
+        for num in arr:
+            freq[num] = freq.get(num, 0) + 1
+
+        max_count = 0
+        for key, value in freq.items():
+            if max_count < value:
+                max_count = value
+        return f"Distinct subset count: {max_count}"
+
+s = Solution()
+arr = [40,50,30,40,50,30,30]
+print(s.minimum_subset_with_distinct_ele(arr))
 
 
+# Remove minimum elements such that no common elements exist in two arrays
+# Given two arrays arr1[] and arr2[] consisting of n and m elements respectively. The task is to find the minimum number of elements 
+# to remove from each array such that intersection of both arrays becomes empty and both arrays become mutually exclusive.
+# input: arr[] = { 1, 2, 3, 4}, arr2[] = { 2, 3, 4, 5, 8 }  --> Output: 3
+# Explanation: We need to remove 2, 3 and 4 from any array.
+class Solution:
+    def remove_minimum_ele(self, arr1, arr2):
+        freq1 = {}
+        freq2 = {}
+        count = 0
+        for num in arr1:
+            freq1[num] = freq1.get(num, 0) + 1
+        for num in arr2:
+            freq2[num] = freq2.get(num, 0) + 1
+        for num in freq1:
+            if num in freq2:
+                count += min(freq1[num], freq2[num])
+        return f"minimum number of elements to remove: {count}"
 
-
-
+s = Solution()
+arr1 = [1, 2, 3, 4]
+arr2 = [2, 3, 4, 5, 8]
+print(s.remove_minimum_ele(arr1, arr2))
 
 
 
