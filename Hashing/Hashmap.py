@@ -448,7 +448,7 @@ class Solution:
             freq2[num] = freq2.get(num, 0) + 1
         for num in freq1:
             if num in freq2:
-                count += min(freq1[num], freq2[num])
+                count += min(freq1[num], freq2[num])    # This is the important line 
         return f"minimum number of elements to remove: {count}"
 
 s = Solution()
@@ -457,7 +457,74 @@ arr2 = [2, 3, 4, 5, 8]
 print(s.remove_minimum_ele(arr1, arr2))
 
 
+# Majority Element
+# Given an array arr[]. Find the majority element in the array. If no majority element exists, return -1.
+# Note: A majority element in an array is an element that appears strictly more than arr.size()/2 times in the array.
+# Input: arr[] = [1, 1, 2, 1, 3, 5, 1] --> Output: 1
+# Explanation: Since, 1 is present more than 7/2 times, so it is the majority element
+class Solution:
+    def majority_element(self, arr):
+        element1 = None
+        count1 = 0
+        for num in arr:
+            if num == element1:
+                count1 += 1
+            elif count1 == 0:
+                element1 = num
+                count1 = 1
+            else:
+                count1 -= 1
+        
+        n = len(arr)
+        if element1 is not None and arr.count(element1) > n//2:
+            return f"Majority element is: {element1}"
+        return -1
+s = Solution()
+arr = [1, 1, 2, 1, 3, 5, 1]
+print(s.majority_element(arr))
 
+
+# Top K Frequent in Array
+# Given a non-empty integer array arr[]. Your task is to find and return the top k elements which have the highest frequency in the array.
+# Note: If two numbers have the same frequency, the larger number should be given the higher priority.
+# Input: arr[] = [3, 1, 4, 4, 5, 2, 6, 1], k = 2 --> Output: [4, 1]
+# Explanation: Frequency of 4 is 2 and frequency of 1 is 2, these two have the maximum frequency and 4 is larger than 1.
+class Solution:
+    def top_K_freq(self, arr, k):
+        freq = {}
+        for num in arr:
+            freq[num] = freq.get(num, 0) + 1
+
+        sorted_elements = sorted(freq, key = lambda num:(freq[num], num), reverse = True)    # This step is more important
+        return sorted_elements[:k]
+
+s = Solution()
+arr = [3, 1, 4, 4, 5, 2, 6, 1]
+print(s.top_K_freq(arr, 2))
+
+
+# Sort by Frequency
+# Given a string s, the task is to arrange the string according to the frequency of each character, in ascending order. 
+# If two elements have the same frequency, then they are sorted in lexicographical order.
+# Input: s = "geeksforgeeks"
+# Output: forggkksseeee
+# Explanation: All the characters with minimum frequency will occur first and the one with same frequency will be arranged lexicographically.
+class Solution:
+    def sort_by_frequency(self, s):
+        freq = {}
+        for char in s:
+            freq[char] = freq.get(char, 0) + 1
+
+        sorted_char = sorted(freq, key=lambda char: (freq[char], char))
+
+        result = ''
+        for char in sorted_char:                    # Practiced some important problems on hash"
+            result += char * freq[char]
+        return result
+
+a = Solution()
+print(a.sort_by_frequency("geeksforgeeks"))
+        
 
 
 
