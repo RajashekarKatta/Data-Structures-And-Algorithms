@@ -312,3 +312,221 @@ print(s.separate_positive_negative(arr))
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Same Direction Two Pointer Problems
+# Move Zeroes
+# Move all zeroes to the end while maintaining the order of non-zero elements.
+class Solution:
+    def move_zeros_end(self, arr):
+        slow = 0
+        for fast in range(len(arr)):
+            if arr[fast] != 0:
+                arr[slow] = arr[fast]
+                slow += 1
+        while slow < len(arr):
+            arr[slow] = 0
+            slow += 1
+        return arr
+s = Solution()
+arr = [0, 1, 0, 3, 12]
+print(s.move_zeros_end(arr))
+
+
+# Find Unique Elements
+class Solution:
+    def unique_ele(self, arr):
+        slow = 0
+        for fast in range(len(arr)):
+            if arr[fast] != arr[slow]:
+                slow += 1
+                arr[slow] = arr[fast]
+                
+        return arr[:slow+1]
+
+s = Solution()
+arr = [1, 2, 2, 3, 3, 4]
+print(s.unique_ele(arr))
