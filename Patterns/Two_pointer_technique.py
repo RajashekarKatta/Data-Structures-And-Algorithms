@@ -312,181 +312,29 @@ print(s.separate_positive_negative(arr))
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# Container with Most Water
+# Given an array arr[] of non-negative integers, where each element arr[i] represents the height of the vertical lines, 
+# find the maximum amount of water that can be contained between any two lines, together with the x-axis.
+# Input: arr[] = [1, 8, 6, 2, 5, 4, 8, 3, 7]  -->  Output: 49
+# Explanation: 8 and 5 are 5 distance apart. So the size of the base = 5. Height of container = min(8, 5) = 5. So, total area = 5 * 5 = 25.
+class Solution:
+    def container_with_most_water(self, arr):
+        left, right = 0, len(arr) - 1
+        max_water = 0
+        while left < right:
+            width = right - left
+            current_water = min(arr[left], arr[right])
+            area = width * current_water
+            max_water = max(max_water, area)
+            if arr[left] < arr[right]:
+                left += 1
+            else:
+                right -= 1
+        return max_water
+
+s = Solution()
+arr = [1, 8, 6, 2, 5, 4, 8, 3, 7] 
+print(s.container_with_most_water(arr))
 
 
 
@@ -530,3 +378,19 @@ class Solution:
 s = Solution()
 arr = [1, 2, 2, 3, 3, 4]
 print(s.unique_ele(arr))
+
+
+# Remove Duplicates from Sorted Array II
+# Now each number can appear at most twice.
+class Solution:
+    def remove_duplicates_II(self, arr):
+        slow = 2
+        for fast in range(2, len(arr)):
+            if arr[fast] != arr[slow - 2]:
+                arr[slow] = arr[fast]
+                slow += 1
+        return arr
+
+s = Solution()
+arr = [1, 1, 1, 2, 2, 3]
+print(s.remove_duplicates_II(arr))
