@@ -140,6 +140,7 @@ arr = [1, 2, 5, 8, 10]
 print(s.pair_with_difference(arr, 2))
 
 
+
 # Merge Two Sorted Arrays
 class Solution:
     def merge_two_arr(self, arr1, arr2):
@@ -233,3 +234,39 @@ class Solution:
 s = Solution()
 arr = [-4, -1, 0, 3, 10]
 print(s.square_sorted_arr(arr))
+
+
+# Dutch National Flag Problem in Python
+# The Dutch National Flag problem is a popular algorithmic problem proposed by Edsger Dijkstra. 
+# The problem is to sort an array consisting of three distinct elements (or "colors") in a single pass through the array. 
+# The three elements could be anything, but for simplicity, we'll use 0, 1, and 2.
+# The goal is to arrange the array such that all 0s come first, followed by all 1s, and then all 2s.
+# Input: arr[] = {0, 1, 2, 0, 1, 2}    --> Output: {0, 0, 1, 1, 2, 2}
+class Solution:
+    def dutch_national_flag(self, arr):
+        left = 0 
+        mid = 0
+        right = len(arr) - 1
+        while mid <= right:
+            if arr[mid] == 0:
+                arr[left], arr[mid] = arr[mid], arr[left]
+                left += 1
+                mid += 1
+
+            elif arr[mid] == 1:
+                mid += 1
+
+            else:
+                arr[mid], arr[right] = arr[right], arr[mid]
+                right -= 1
+        return arr
+s = Solution()
+arr = [0, 1, 2, 0, 1, 2]
+print(s.dutch_national_flag(arr))
+
+
+
+
+
+
+
