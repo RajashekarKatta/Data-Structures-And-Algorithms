@@ -265,8 +265,50 @@ arr = [0, 1, 2, 0, 1, 2]
 print(s.dutch_national_flag(arr))
 
 
+# Partition Array Around a Value We want:
+# Elements less than x on the left
+# Elements greater than or equal to x on the right
+class Solution:
+    def partioton_arr(self, arr, x):
+        left, right = 0, len(arr) - 1
+        while left <= right:
+            if arr[left] < x:
+                left += 1
+            elif arr[right] >= x:
+                right -= 1
+            else:
+                arr[left], arr[right] = arr[right], arr[left]
+                left += 1
+                right -= 1
+        return arr
+s = Solution()
+arr = [9, 12, 3, 5, 14, 10, 10]
+x = 10
+print(s.partioton_arr(arr, x))
 
 
+
+# Separate Positive and Negative Numbers
+class Solution:
+    def separate_positive_negative(self, arr):
+        left = 0
+        right = len(arr) - 1
+        while left <= right:
+            if arr[left] < 0:               # left is already negative → move forward
+                left += 1
+
+            elif arr[right] >= 0:           # right is already positive → move backward
+                right -= 1
+
+            else:                           # left has positive and right has negative → swap
+                arr[left], arr[right] = arr[right], arr[left]
+                left += 1
+                right -= 1
+
+        return arr
+s = Solution()
+arr = [1, -2, 3, -4, 5, -6]
+print(s.separate_positive_negative(arr))
 
 
 
