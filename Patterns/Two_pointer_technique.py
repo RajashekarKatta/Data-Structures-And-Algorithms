@@ -338,8 +338,35 @@ print(s.container_with_most_water(arr))
 
 
 
+# Trapping Rain Water Problem
+# Given an array arr[] of size n consisting of non-negative integers, where each element represents the height of a bar in an elevation map and 
+# the width of each bar is 1, determine the total amount of water that can be trapped between the bars after it rains.
+# Input: arr[] = [3, 0, 1, 0, 4, 0, 2]  --> Output: 10
+# Explanation: The expected rainwater to be trapped is shown in the above image.
+class Solution:
+    def trapping_rain_water(self, arr):
+        left, right = 0, len(arr) - 1
+        left_max = 0
+        right_max = 0
+        water = 0
+        while left < right:
+            if arr[left] <= arr[right]:
+                if arr[left] >= left_max:
+                    left_max = arr[left]
+                else:
+                    water += left_max - arr[left]
+                left += 1
+            else:
+                if arr[right] >= right_max:
+                    right_max = arr[right]
+                else:
+                    water += right_max - arr[right]
+                right -= 1
+        return f"Trapped total rain water {water}"
 
-
+s = Solution()
+arr = [4, 2, 0, 3, 2, 5]
+print(s.trapping_rain_water(arr))
 
 
 
