@@ -59,3 +59,47 @@ print(a.longest_substring("GeeksforGeeks"))
 
 
 
+# Maximum sum of a subarray of size k
+# Given an array of integers arr[] and an integer k, find the maximum possible sum among all contiguous subarrays of size exactly k.
+# A subarray is a sequence of consecutive elements from the original array. Return the maximum sum that can be obtained from any such subarray of length k.
+# Input  : arr[] = [100, 200, 300, 400],  k = 2 -->  Output : 700
+class Solution:
+    def maximum_sum_of_subarray(self, arr, k):
+        window_sum = sum(arr[:k])
+        maximum_sum = 0
+        for i in range(k, len(arr)):
+            window_sum += arr[i]
+            window_sum -= arr[i - k]
+            maximum_sum = max(maximum_sum, window_sum)
+        return maximum_sum
+    
+s = Solution()
+arr = [100, 200, 300, 400]
+print(s.maximum_sum_of_subarray(arr, 2))
+
+
+
+# Smallest window containing 0, 1 and 2
+# Given a string s consisting of the characters 0, 1 and 2, find the length of the smallest substring of string s that contains all the three characters 0, 1 and 2. If no such substring exists, then return -1.
+# Input: s = "01212" --> Output: 3
+# Explanation: The substring 012 is the smallest substring that contains the characters 0, 1 and 2.
+class Solution:
+    def smallest_substring(self, s):
+        freq = {}
+        left = 0
+        min_length = float('inf')
+        for right in range(len(s)):
+            freq[s[right]] = freq.get(s[right], 0) + 1
+            while len(freq) == 3:
+                min_length = min(min_length, right - left + 1)
+                freq[s[left]] -= 1
+                if freq[s[left]] == 0:
+                    del freq[s[left]]
+                left += 1
+        if min_length == float('inf'):
+            return -1
+        return min_length
+
+a = Solution()
+print(a.smallest_substring("01212"))
+
