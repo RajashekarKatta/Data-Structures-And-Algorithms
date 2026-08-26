@@ -103,3 +103,40 @@ class Solution:
 a = Solution()
 print(a.smallest_substring("01212"))
 
+
+# Remove all consecutive duplicates from a string
+# Given a string s , we have to remove all the consecutive duplicate characters of the string and return the resultant string. 
+# Input: str = "aaaaabbbbbb"  --> Output: ab
+# Explanation: Remove consecutive duplicate characters from a string s  such as 5 a's are at consecutive so only write a and same like that in b's condition.
+class Solution:
+    def remove_consective_duplicates(self, s):
+        result = [s[0]]
+        for i in range(1, len(s)):
+            if s[i] != s[i-1]:
+                result.append(s[i])
+        return ''.join(result)
+
+a = Solution()
+print(a.remove_consective_duplicates("aaaaabbbbbbb"))
+
+
+# Maximum sum subarray having sum less than or equal to given sum
+# Given an array arr[] of integers and a number x, find the sum of subarray having a maximum sum less than or equal to the given value of x.
+# Input: arr[] = [1, 2, 3, 4, 5], x = 11   -> Output: 10
+# Explanation: Subarray having maximum sum is [1, 2, 3, 4].
+class Solution:
+    def max_sum_subarray(self, arr, x):
+        left = 0
+        current_sum = 0
+        max_sum = 0
+        for right in range(len(arr)):
+            current_sum += arr[right]
+            while current_sum > x:
+                current_sum -= arr[left]
+                left += 1
+
+            max_sum = max(max_sum, current_sum)
+        return max_sum
+s = Solution()
+arr = [1, 2, 3, 4, 5]
+print(s.max_sum_subarray(arr, 11))
