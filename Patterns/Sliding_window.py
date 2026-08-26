@@ -32,6 +32,8 @@ s = Solution()
 arr = [2,4,6,8,10,12]
 print(s.max_sum(arr, 3))
 
+
+
 # In Sliding window we have two types  1). Fixed size window like max_sum, average,...etc
 # 2) Variable size Sliding Window the window changes. Window keeps changing. This is harder but much more useful.
 # Example for variable size sliding window
@@ -58,9 +60,9 @@ print(a.longest_substring("GeeksforGeeks"))
 
 
 
-
 # Maximum sum of a subarray of size k
-# Given an array of integers arr[] and an integer k, find the maximum possible sum among all contiguous subarrays of size exactly k.
+# Given an array of 
+#  gers arr[] and an integer k, find the maximum possible sum among all contiguous subarrays of size exactly k.
 # A subarray is a sequence of consecutive elements from the original array. Return the maximum sum that can be obtained from any such subarray of length k.
 # Input  : arr[] = [100, 200, 300, 400],  k = 2 -->  Output : 700
 class Solution:
@@ -132,7 +134,7 @@ class Solution:
         for right in range(len(arr)):
             current_sum += arr[right]
             while current_sum > x:
-                current_sum -= arr[left]
+                current_sum -= arr[left]            # These steps are important for this problem
                 left += 1
 
             max_sum = max(max_sum, current_sum)
@@ -140,3 +142,95 @@ class Solution:
 s = Solution()
 arr = [1, 2, 3, 4, 5]
 print(s.max_sum_subarray(arr, 11))
+
+
+# # Moving Averages using Sliding window Technique
+class Solution:
+    def moving_averages(self, arr, k):
+        averages = []
+        current_sum = sum(arr[:k])
+        averages.append(current_sum//k)
+        for i in range(k, len(arr)):
+            current_sum += arr[i] - arr[i - k]
+            averages.append(current_sum//k)
+        return averages
+s = Solution()
+arr = [30, 32, 34, 31, 35, 33, 29]
+print(s.moving_averages(arr, 3))
+
+
+
+# Smallest subarray with sum ≥ target.
+# Given an array of positive integers arr[] and a positive integer target, find the minimum length of 
+# a contiguous subarray whose sum is greater than or equal to target.
+# If there is no such subarray, return -1.
+class Solution:
+    def min_subarray_length(self, arr, target):
+        left = 0
+        current_sum = 0
+        min_length = float('inf')
+        for right in range(len(arr)):
+            current_sum += arr[right]
+            while current_sum >= target:
+                min_length = min(min_length, right - left + 1)
+                current_sum -= arr[left]
+                left += 1
+        if min_length == float('inf'):
+            return -1
+        return min_length
+
+s = Solution()
+arr = [2, 3, 1, 2, 4, 3]
+print(s.min_subarray_length(arr, 7))
+
+
+# Smallest subarray with sum ≥ target.       NOTE: "SAME PROBLEM ABOVE ONE BUT HERE WE ARE RETURNING SMALLEST SUBARRAY"
+# Given an array of positive integers arr[] and a positive integer target, find the minimum length of 
+# a contiguous subarray whose sum is greater than or equal to target.
+# If there is no such subarray, return -1.
+class Solution:
+    def minimum_subarray(self, arr, target):
+        left = 0
+        current_sum = 0
+        min_length = float('inf')
+        result = []
+        for right in range(len(arr)):
+            current_sum += arr[right]
+            while current_sum >= target:
+                if min_length > (right - left + 1):
+                    min_length = right - left + 1
+                    result = arr[left:right+1]
+                current_sum -= arr[left]
+                left += 1
+        return result
+    
+s = Solution()
+arr = [2, 3, 1, 2, 4, 3]
+print(s.minimum_subarray(arr, 7))
+
+
+
+# Smallest Subarray with Sum Greater Than a Given Value
+# Given an array of positive integers arr[] and an integer x, find the minimum length of a contiguous subarray whose sum is strictly greater than x.
+# If there is no such subarray, return 0.
+# Input: arr[] = [1, 4, 45, 6, 10, 19]  --> x = 51
+class Solution:
+    def smallest_subarray_with_sum_greater(self, arr, target):
+        left = 0
+        current_sum = 0
+        min_length = float('inf')
+        for right in range(len(arr)):
+            current_sum += arr[right]
+            while current_sum > target:
+                min_length = min(min_length, right - left + 1)
+                current_sum -= arr[left]
+                left += 1
+        if min_length != float('inf'):
+            return min_length
+        else:
+            return 0
+s = Solution()
+arr = [1, 4, 45, 6, 10, 19]
+print(s.smallest_subarray_with_sum_greater(arr, 52))
+
+
