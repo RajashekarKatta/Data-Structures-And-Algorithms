@@ -145,7 +145,7 @@ print(s.max_sum_subarray(arr, 11))
 
 
 
-# Count substrings with k distinct characters
+# Count substrings with k distinct characters           /****\
 # Given a string s consisting of only lowercase English letters and an integer k, count the total number of substrings (not necessarily distinct) of s that contain exactly k distinct characters.
 # Note: A substring is a contiguous sequence of characters within a string.
 # Substrings that are identical but occur at different positions should each be counted separately.
@@ -175,116 +175,209 @@ print(s.count_substring("abc", 2))
 
 
 
-# # # Moving Averages using Sliding window Technique
-# class Solution:
-#     def moving_averages(self, arr, k):
-#         averages = []
-#         current_sum = sum(arr[:k])
-#         averages.append(current_sum//k)
-#         for i in range(k, len(arr)):
-#             current_sum += arr[i] - arr[i - k]
-#             averages.append(current_sum//k)
-#         return averages
-# s = Solution()
-# arr = [30, 32, 34, 31, 35, 33, 29]
-# print(s.moving_averages(arr, 3))
+# # Moving Averages using Sliding window Technique
+class Solution:
+    def moving_averages(self, arr, k):
+        averages = []
+        current_sum = sum(arr[:k])
+        averages.append(current_sum//k)
+        for i in range(k, len(arr)):
+            current_sum += arr[i] - arr[i - k]
+            averages.append(current_sum//k)
+        return averages
+s = Solution()
+arr = [30, 32, 34, 31, 35, 33, 29]
+print(s.moving_averages(arr, 3))
 
 
 
-# # Smallest subarray with sum ≥ target.
-# # Given an array of positive integers arr[] and a positive integer target, find the minimum length of 
-# # a contiguous subarray whose sum is greater than or equal to target.
-# # If there is no such subarray, return -1.
-# class Solution:
-#     def min_subarray_length(self, arr, target):
-#         left = 0
-#         current_sum = 0
-#         min_length = float('inf')
-#         for right in range(len(arr)):
-#             current_sum += arr[right]
-#             while current_sum >= target:
-#                 min_length = min(min_length, right - left + 1)
-#                 current_sum -= arr[left]
-#                 left += 1
-#         if min_length == float('inf'):
-#             return -1
-#         return min_length
+# Smallest subarray with sum ≥ target.
+# Given an array of positive integers arr[] and a positive integer target, find the minimum length of 
+# a contiguous subarray whose sum is greater than or equal to target.
+# If there is no such subarray, return -1.
+class Solution:
+    def min_subarray_length(self, arr, target):
+        left = 0
+        current_sum = 0
+        min_length = float('inf')
+        for right in range(len(arr)):
+            current_sum += arr[right]
+            while current_sum >= target:
+                min_length = min(min_length, right - left + 1)
+                current_sum -= arr[left]
+                left += 1
+        if min_length == float('inf'):
+            return -1
+        return min_length
 
-# s = Solution()
-# arr = [2, 3, 1, 2, 4, 3]
-# print(s.min_subarray_length(arr, 7))
+s = Solution()
+arr = [2, 3, 1, 2, 4, 3]
+print(s.min_subarray_length(arr, 7))
 
 
-# # Smallest subarray with sum ≥ target.       NOTE: "SAME PROBLEM ABOVE ONE BUT HERE WE ARE RETURNING SMALLEST SUBARRAY"
-# # Given an array of positive integers arr[] and a positive integer target, find the minimum length of 
-# # a contiguous subarray whose sum is greater than or equal to target.
-# # If there is no such subarray, return -1.
-# class Solution:
-#     def minimum_subarray(self, arr, target):
-#         left = 0
-#         current_sum = 0
-#         min_length = float('inf')
-#         result = []
-#         for right in range(len(arr)):
-#             current_sum += arr[right]
-#             while current_sum >= target:
-#                 if min_length > (right - left + 1):
-#                     min_length = right - left + 1
-#                     result = arr[left:right+1]
-#                 current_sum -= arr[left]
-#                 left += 1
-#         return result
+# Smallest subarray with sum ≥ target.       NOTE: "SAME PROBLEM ABOVE ONE BUT HERE WE ARE RETURNING SMALLEST SUBARRAY"
+# Given an array of positive integers arr[] and a positive integer target, find the minimum length of 
+# a contiguous subarray whose sum is greater than or equal to target.
+# If there is no such subarray, return -1.
+class Solution:
+    def minimum_subarray(self, arr, target):
+        left = 0
+        current_sum = 0
+        min_length = float('inf')
+        result = []
+        for right in range(len(arr)):
+            current_sum += arr[right]
+            while current_sum >= target:
+                if min_length > (right - left + 1):
+                    min_length = right - left + 1
+                    result = arr[left:right+1]
+                current_sum -= arr[left]
+                left += 1
+        return result
     
-# s = Solution()
-# arr = [2, 3, 1, 2, 4, 3]
-# print(s.minimum_subarray(arr, 7))
+s = Solution()
+arr = [2, 3, 1, 2, 4, 3]
+print(s.minimum_subarray(arr, 7))
 
 
 
-# # Smallest Subarray with Sum Greater Than a Given Value
-# # Given an array of positive integers arr[] and an integer x, find the minimum length of a contiguous subarray whose sum is strictly greater than x.
-# # If there is no such subarray, return 0.
-# # Input: arr[] = [1, 4, 45, 6, 10, 19]  --> x = 51
-# class Solution:
-#     def smallest_subarray_with_sum_greater(self, arr, target):
-#         left = 0
-#         current_sum = 0
-#         min_length = float('inf')
-#         for right in range(len(arr)):
-#             current_sum += arr[right]
-#             while current_sum > target:
-#                 min_length = min(min_length, right - left + 1)
-#                 current_sum -= arr[left]
-#                 left += 1
-#         if min_length != float('inf'):
-#             return min_length
-#         else:
-#             return 0
-# s = Solution()
-# arr = [1, 4, 45, 6, 10, 19]
-# print(s.smallest_subarray_with_sum_greater(arr, 52))
+# Smallest Subarray with Sum Greater Than a Given Value      *****
+# Given an array of positive integers arr[] and an integer x, find the minimum length of a contiguous subarray whose sum is strictly greater than x.
+# If there is no such subarray, return 0.
+# Input: arr[] = [1, 4, 45, 6, 10, 19]  --> x = 51
+class Solution:
+    def smallest_subarray_with_sum_greater(self, arr, target):
+        left = 0
+        current_sum = 0
+        min_length = float('inf')
+        for right in range(len(arr)):
+            current_sum += arr[right]
+            while current_sum > target:
+                min_length = min(min_length, right - left + 1)
+                current_sum -= arr[left]
+                left += 1
+        if min_length != float('inf'):
+            return min_length
+        else:
+            return 0
+s = Solution()
+arr = [1, 4, 45, 6, 10, 19]
+print(s.smallest_subarray_with_sum_greater(arr, 52))
 
 
 
-# # Subarray with Given Sum               Most important problem
-# # Given an array of positive integers arr[] and a positive integer target, find a contiguous subarray whose sum is equal to target.
-# # Return the starting and ending positions of the first such subarray. If no such subarray exists, return [-1].
-# class Solution:
-#     def subarry_with_sum(self, arr, target):
-#         left = 0
-#         current_sum = 0
-#         for right in range(len(arr)):
-#             current_sum += arr[right]
-#             while current_sum > target:
-#                 current_sum -= arr[left]
-#                 left += 1
+# Subarray with Given Sum               Most important problem              *****
+# Given an array of positive integers arr[] and a positive integer target, find a contiguous subarray whose sum is equal to target.
+# Return the starting and ending positions of the first such subarray. If no such subarray exists, return [-1].
+class Solution:
+    def subarry_with_sum(self, arr, target):
+        left = 0
+        current_sum = 0
+        for right in range(len(arr)):
+            current_sum += arr[right]
+            while current_sum > target:
+                current_sum -= arr[left]
+                left += 1
 
-#             if current_sum == target:
-#                 return arr[left:right]
-#         return None
-# s = Solution()
-# arr = [1, 4, 20, 3, 10, 5]
-# print(s.subarry_with_sum(arr, 33))
+            if current_sum == target:
+                return arr[left:right]
+        return None
+s = Solution()
+arr = [1, 4, 20, 3, 10, 5]
+print(s.subarry_with_sum(arr, 33))
 
 
 
+# Maximum Consecutive Ones After Flipping Zeroes    *****
+# Given a binary array arr[] and an integer k, find the maximum length of a subarray containing all ones after flipping at most k zeroes to 1's.
+# Input: arr[] = [1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1], k = 2   --> Output: 8
+# Explanation: By flipping the zeroes at index 5 and 7, we get the longest subarray from index 3 to 10 containing all 1's.
+class Solution:
+    def max_consective_ones(self, arr, k):
+        left = 0
+        max_length = 0
+        zero_count = 0
+        for right in range(len(arr)):
+            if arr[right] == 0:
+                zero_count += 1
+            while zero_count > k:
+                if arr[left] == 0:
+                    zero_count -= 1
+                left += 1
+            max_length = max(max_length, right - left + 1)
+        return max_length
+s = Solution()
+arr = [1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1]
+print(s.max_consective_ones(arr, 2))    
+
+
+# Max Consecutive Bit                           *****
+# Given an array arr[] consisting of only 0’s and 1’s, return count of the maximum number of consecutive 1’s or 0’s present in the array. 
+# Input: arr[] = [0, 1, 0, 1, 1, 1, 1]  -->  Output: 4
+# Explanation: The maximum number of consecutive 1’s in the array is 4 from index 3-6
+class Solution:
+    def max_consective_1(self, arr):
+        current = 1
+        maximum = 1
+        for i in range(1, len(arr)):
+            if arr[i] == arr[i-1]:
+                current += 1
+            else:
+                current = 1
+            maximum = max(maximum, current)
+        return f"maximum consective ones {maximum}"
+s = Solution()
+arr = [0, 1, 0, 1, 1, 1, 1]
+print(s.max_consective_1(arr))
+
+
+
+
+# Longest Subarray with K Sections of Unique Items              maximum fruits in baseket           *****
+# You are given an array of positive integers arr[] and an integer k. The task is to find length of the longest subarray with the following conditions
+# Each element must fit into one of k sections.
+# Each section can only store a unique number and its multiple consecutive instances.
+# Input: arr[] = [1, 2, 2, 3, 1, 4], k = 2  -->  Output: 3
+# Explanation: The subarray is [1, 2, 2, 3, 1], the sections are [1], [2, 2], [3] and [1]
+# Total elements chosen = 3.
+class Solution:
+    def longest_subarray(self, arr, k):
+        freq = {}
+        left = 0
+        max_length = 0
+        for right in range(len(arr)):
+            freq[arr[right]] = freq.get(arr[right], 0) + 1
+            while len(freq) > k:
+                freq[arr[left]] -= 1
+
+                if freq[arr[left]] == 0:
+                    del freq[arr[left]] 
+                left += 1
+            max_length = max(max_length, right - left + 1)
+        return max_length
+s = Solution()
+arr = [1, 2, 2, 3, 1, 4]
+print(s.longest_subarray(arr, 2))
+
+
+
+# Subarrays Product Less than K                 *****
+# Difficulty: MediumAccuracy: 21.0%Submissions: 123K+Points: 4
+# Given an integer array arr[] of positive numbers, the task is to find the number of possible contiguous subarrays having product less than k.
+# Input : k = 10, arr[] = [1, 2, 3, 4]  --->  Output : 7
+# Explanation: The contiguous subarrays whose product is less than 10 are [1], [2], [3], [4], [1, 2], [2, 3], and [1, 2, 3]. Therefore, the total number of valid contiguous subarrays is 7.
+class Solution:
+    def count_subarrays(self, arr, k):
+        left = 0
+        product = 1
+        count = 0
+        for right in range(len(arr)):
+            product *= arr[right]
+            while product >= k:
+                product //= arr[left]
+                left += 1
+            count += right - left + 1
+        return count 
+s = Solution()
+arr = [1, 2, 3, 4]
+print(s.count_subarrays(arr, 10))
