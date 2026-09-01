@@ -5,6 +5,9 @@
 # Given an integer array arr[] and an integer k, determine whether there exist two indices i and j such that arr[i] == arr[j] and |i - j| ≤ k. 
 #If such a pair exists, return 'Yes', otherwise return 'No'.
 # Input: k = 3, arr[] = [1, 2, 3, 1, 4, 5]--> Output: Yes
+from django.conf.locale import ar
+
+
 class SOlution:
     def duplicate_within_k_distance(self, arr, k):
         last_seen = {}
@@ -221,4 +224,50 @@ class Solution:
 
 s = Solution()
 arr = [2,3,5,4,5,3,4]
-print(s.unique_number(arr))     
+print(s.unique_number(arr))  
+
+
+# Equilibrium Index
+# Given an array arr[] of size n, the task is to return an equilibrium index (if any) or -1 if no equilibrium index exists. 
+# The equilibrium index of an array is an index such that the sum of all elements at lower indexes equals the sum of all elements at higher indexes.
+# ఈక్విలిబ్రియం ఇండెక్స్ (Equilibrium Index) అంటే ఒక అర్రే (array) లోని ఒక నిర్దిష్ట స్థానం (index). ఆ స్థానానికి ఎడమ వైపు (left side) ఉన్న సంఖ్యల మొత్తం 
+#(sum) మరియు కుడి వైపు (right side) ఉన్న సంఖ్యల మొత్తం సరిసమానంగా ఉంటే, ఆ ఇండెక్స్‌ను "Equilibrium Index" అంటారు
+# nput: arr[] = [1, 2, 0, 3]  --> Output: 2
+class Solution:
+    def equilibrium_index(self, arr):
+        left_sum = 0
+        total_sum = sum(arr)
+        for i in range(len(arr)):
+            right_sum = total_sum - arr[i] - left_sum
+            if left_sum == right_sum:
+                return f"Equilibrium index is {i}"
+            left_sum += arr[i]
+        return f"No equilibrium index found"
+
+s = Solution()
+arr = [1, 2, 0, 3]
+print(s.equilibrium_index(arr))
+
+
+
+# Missing and Repeating in an Array
+# Given an unsorted array arr[] of size n, containing elements from the range 1 to n, it is known that one number in this range is missing, 
+# and another number occurs twice in the array, find both the duplicate number and the missing number.
+class Solution:
+    def missing_two_numbers(self, arr):
+        n = len(arr)
+        freq = [0] * (n-1)
+        for num in arr:
+            freq[num -1] += 1
+        missing = repeating = -1
+        for i in range(1, n+1):
+            if freq[i] == 0:
+                missing = i
+            if freq[i] == 2:
+                repeating = i
+        return f"Missing number is {missing} and Repeating number is {repeating}"
+s = Solution()
+arr = [4, 3, 6, 2, 1, 1]
+print(s.missing_two_numbers(arr))
+
+
