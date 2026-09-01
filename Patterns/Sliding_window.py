@@ -381,3 +381,11 @@ class Solution:
 s = Solution()
 arr = [1, 2, 3, 4]
 print(s.count_subarrays(arr, 10))
+
+
+
+
+
+
+
+

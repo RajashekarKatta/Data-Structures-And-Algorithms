@@ -206,4 +206,19 @@ arr = [2, 3, -2, 4]
 print(s.max_subarr_product(arr))
 
 
-        
+
+# Given an array of integers, every element in the array appears twice except for one element which appears only once. 
+# The task is to identify and return the element that occurs only once. 
+# Input:  arr[] = [2, 3, 5, 4, 5, 3, 4]  --> # Output: 2 
+class Solution:
+    def unique_number(self, arr):
+        hash_map = {}
+        for num in arr:
+            hash_map[num] = hash_map.get(num, 0) + 1
+        for num in hash_map:
+            if hash_map[num] == 1:
+                return num
+
+s = Solution()
+arr = [2,3,5,4,5,3,4]
+print(s.unique_number(arr))     

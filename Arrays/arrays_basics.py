@@ -1,4 +1,4 @@
-# Arrays
+    # Arrays
 # Array is a Linear Data Structure. An Array is a Collection of similar types of elements stored in a contiguous memory location.we ca acess the each item through array index
 
 # Operations On Array
