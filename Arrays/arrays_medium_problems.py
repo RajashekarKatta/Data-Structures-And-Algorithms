@@ -256,9 +256,9 @@ print(s.equilibrium_index(arr))
 class Solution:
     def missing_two_numbers(self, arr):
         n = len(arr)
-        freq = [0] * (n-1)
+        freq = [0] * (n+1)
         for num in arr:
-            freq[num -1] += 1
+            freq[num] += 1
         missing = repeating = -1
         for i in range(1, n+1):
             if freq[i] == 0:
@@ -271,3 +271,66 @@ arr = [4, 3, 6, 2, 1, 1]
 print(s.missing_two_numbers(arr))
 
 
+
+# pair of elements with difference k
+# Given an array of integers and a target difference $k$, you need to find if there exists a pair of elements in the array whose absolute difference is 
+# exactly k.If such a pair exists, return or print the pair.
+# Input: Array = [5, 20, 3, 2, 50, 80], $k = 18
+# Output: (2, 20) because $|2 - 20| = 18.
+class Solution:
+    def closest_pair(self, arr, k):
+        n = len(arr)
+        arr.sort()
+        left, right = 0, 1
+        while left < n and right < n:
+            diff = arr[right] - arr[left]
+            if diff == k:
+                return arr[left], arr[right]
+            elif diff < k:
+                right += 1
+            else:
+                left += 1
+                if left == right:
+                    right += 1
+        return "No such pair exists"
+s = Solution()
+arr = [5, 20, 3, 2, 50, 80]
+k = 18
+print(s.closest_pair(arr, k))
+
+
+# Merge two sorted arrays
+# Given two sorted arrays arr1[] of size n and arr2[] of size m. Merge these two arrays.
+# After the merge, the first n smallest elements of the combined sorted array should be stored in arr1[], and the remaining m largest elements should be 
+# stored in arr2[]. After the merging process, both arr1[] and arr2[] must remain sorted in non-decreasing order.
+# Input: arr1[] = [1, 3, 4, 5], arr2[] = [2, 4, 6, 8] 
+# Output: arr1[] = [1, 2, 3, 4], arr2[] = [4 5, 6, 8]
+class Solution:
+    def merge_sorted_arrays(self, arr1, arr2):
+        result = []
+        i, j = 0, 0
+        while i < len(arr1) and j < len(arr2):
+            if arr1[i] < arr2[j]:
+                result.append(arr1[i])
+                i += 1
+            else:
+                result.append(arr2[j])
+                j += 1
+        while i < len(arr1):
+            result.append(arr1[i])
+            i += 1
+        while j < len(arr2):
+            result.append(arr2[j])
+            j += 1
+        for i in range(len(arr1)):
+            arr[i] = result[i]
+
+        for j in range(len(arr2)):
+            arr[j] = result[len(arr1) + j]
+
+        return arr1, arr2
+
+s = Solution()
+arr1 = [1, 3, 4, 5]
+arr2 = [2, 4, 6, 8]
+print(s.merge_sorted_arrays(arr1, arr2))
