@@ -299,6 +299,25 @@ k = 18
 print(s.closest_pair(arr, k))
 
 
+# Another approach for pair of elements with difference k
+class Solution:
+    def pair_with_difference_k(self, arr, k):
+        seen = set()
+        for num in arr:
+            target1 = num - k
+            target2 = num + k
+            if target1 in seen:
+                return (target1, num)
+            if target2 in seen:
+                return (num, target2)
+            seen.add(num)
+        return "No Such pair exists"
+s = Solution()
+arr = [5, 20, 3, 2, 50, 80]
+k = 18
+print(s.pair_with_difference_k(arr, k))
+
+
 # Merge two sorted arrays
 # Given two sorted arrays arr1[] of size n and arr2[] of size m. Merge these two arrays.
 # After the merge, the first n smallest elements of the combined sorted array should be stored in arr1[], and the remaining m largest elements should be 
@@ -334,3 +353,259 @@ s = Solution()
 arr1 = [1, 3, 4, 5]
 arr2 = [2, 4, 6, 8]
 print(s.merge_sorted_arrays(arr1, arr2))
+
+
+
+# Product of Array Except Self          *** Most important problem in array ***
+# You are given an integer array nums of length n. Return an array result such that:
+# result[i] is equal to the product of all the elements of nums except nums[i].
+# Constraints: --> You must not use the division operator.
+# --> The solution should run in O(n) time.
+# --> Use O(1) extra space, excluding the output array.
+class Solution:
+    def product_except_self(self, nums):
+        n = len(nums)
+        result = [1] * n
+        left_product = 1
+        for i in range(n):
+            result[i] = left_product
+            left_product *= nums[i]
+        right_product = 1
+        for i in range(n-1, -1, -1):
+            result[i] *= right_product
+            right_product *= nums[i]
+        return result
+s = Solution()
+nums = [1, 2, 3, 4]
+print(s.product_except_self(nums))
+
+
+
+# Two Sum - Pair Closest to 0
+# Given an integer array arr[], find the sum of any two elements whose sum is closest to zero.
+# Note: In case if we have two ways to form sum closest to zero, return the maximum sum among them.
+class Solution:
+    def two_sum_closest_to_zero(self, arr):
+        arr.sort()
+        left, right = 0, len(arr) -1
+        closest_sum = arr[left] + arr[right]
+        while left < right:
+            current_sum = arr[left] + arr[right]
+            if abs(current_sum) < abs(closest_sum):
+                closest_sum = current_sum
+            if current_sum < 0:
+                left += 1
+            elif current_sum > 0:
+                right -= 1
+            else:
+                return 0
+        return closest_sum
+s = Solution()
+arr = [1, 60, -10, 70, -80, 85]
+print(s.two_sum_closest_to_zero(arr))
+
+
+
+# Split array into three equal sum segments
+# Given an integer array arr[], the task is to divide the array into three non-empty contiguous segments 
+# with equal sum. In other words, we need to return an index pair [i, j], such that sum(arr[0...i]) = sum(arr[i+1...j]) = sum(arr[j+1...n-1]).
+# Note: If it is impossible to divide the array into three non-empty contiguous segments, return [-1, -1].
+class Solution:
+    def split_array_into_three_qual_sum_segments(self, arr):
+        total_sum = sum(arr)
+        if total_sum % 3 != 0:
+            return [-1, -1]
+        target = total_sum // 3
+        current_sum = 0
+        first_index = -1
+        for i in range(len(arr)):
+            current_sum += arr[i]
+            if current_sum == target and first_index == -1:
+                first_index = i
+            elif current_sum == 2*target and first_index != -1:
+                return  first_index, i
+        return [-1, -1]
+s = Solution()
+arr = [1, 2, 3, 0, 3]
+print(s.split_array_into_three_qual_sum_segments(arr))
+
+
+
+
+# Maximum Circular Subarray Sum
+# Given a circular array arr[] of size n, find the maximum possible sum of a non-empty subarray.
+# Input: arr[] = {8, -8, 9, -9, 10, -11, 12}
+# Output: 22
+# Explanation: Circular Subarray {12, 8, -8, 9, -9, 10} has the maximum sum, which is 22.
+class Solution:
+    def max_circular_subarray_sum(self, arr):
+        max_sum = min_sum = 0
+        current_max = current_min = 0
+        total_sum = 0
+        for num in arr:
+            current_max = max(num, current_max + num)
+            current_min = min(num, current_min + num)
+            max_sum = max(max_sum, current_max)
+            min_sum = min(min_sum, current_min)
+            total_sum += num
+        if total_sum == min_sum:
+            return max_sum
+        elif max_sum < 0:
+            return max_sum
+        return max(max_sum, total_sum - min_sum)
+s = Solution()
+arr = [8, -8, 9, -9, 10, -11, 12]
+print(s.max_circular_subarray_sum(arr))
+
+
+
+# Two Find the next Permutation  [Expected Approach] Generating Only Next - O(n) Time and O(1) Space
+class Solution:
+    def next_permutation(self, arr):
+        n = len(arr)
+        pivot = -1
+        for i in range(n-2, -1, -1):
+            if arr[i] < arr[i+1]:
+                pivot = i
+                break
+        if pivot == -1:
+            arr.reverse()
+            return arr
+
+        for i in range(n-1, pivot, -1):
+            if arr[i] > arr[pivot]:
+                arr[i], arr[pivot] = arr[pivot], arr[i]
+                break
+        arr[pivot + 1:] = reversed(arr[pivot+1:])
+        return arr
+s = Solution()
+arr = [1,2,3]
+print(s.next_permutation(arr))
+
+
+
+# Maximum Consecutive Ones After Flipping Zeroes. Given a binary array arr[] and an integer k, 
+# find the maximum length of a subarray containing all ones after flipping at most k zeroes to 1's.
+# Input: arr[] = {1, 0, 1}, k = 1
+# Output: 3
+class Solution:
+    def max_consective_ones_after_flipping_zeros(self, arr, k):
+        left = 0
+        max_length = 0
+        zero_count = 0
+        for right in range(len(arr)):
+            if arr[right] == 0:
+                zero_count += 1
+            while zero_count > k:
+                if arr[left] == 0:
+                    zero_count -= 1
+                left += 1
+            max_length = max(max_length, right -left + 1)
+        return max_length
+s = Solution()
+arr = [1, 0, 0, 1, 0, 1, 0, 1]
+print(s.max_consective_ones_after_flipping_zeros(arr, 2)) 
+
+
+# Container With Most Water
+# Given an array arr[] of non-negative integers, where each element arr[i] represents the height of the vertical lines, 
+# find the maximum amount of water that can be contained between any two lines, together with the x-axis.
+# Input: arr[] = [1, 5, 4, 3]
+# Output: 6
+class Solution:
+    def container_with_most_water(self, arr):
+        left, right = 0, len(arr) -1
+        max_water = 0
+        while left < right:
+            width = right - left
+            current_water = min(arr[left] , arr[right])
+            area = width * current_water
+            max_water = max(max_water, area)
+            if arr[left] < arr[right]:
+                left += 1
+            else:
+                right -= 1
+        return max_water
+s = Solution()
+arr = [1,8,6,2,5,4,8,3,7]
+print(s.container_with_most_water(arr))
+
+
+
+# Pair Sum in a Sorted and Rotated Array
+# Given an array arr[] of size n, which is sorted and then rotated around an unknown pivot, 
+# the task is to check whether there exists a pair of elements in the array whose sum is equal to a given target value.
+# Input: arr[] = [11, 15, 6, 8, 9, 10], target = 16 -->  Output: true
+class Solution:
+    def pair_sum_in_sorted_rotated_array(self, arr, target):
+        n = len(arr)
+        for i in range(n):
+            if arr[i] > arr[i+1]:
+                break
+        left = (i+1) % n
+        right = i
+        while left != right:
+            current_sum = arr[left] + arr[right]
+            if current_sum == target:
+                return True
+            elif current_sum < target:
+                left = (left + 1) % n
+            else:
+                right = (n + right - 1) % n
+        return False
+s = Solution()
+arr = [11, 15, 6, 8, 9, 10]
+target = 16
+print(s.pair_sum_in_sorted_rotated_array(arr, target))
+
+
+
+# Minimize the maximum difference between the heights
+# Given the heights of n towers and a positive integer k, increase or decrease the height of all towers by k (only once). After modifications, the task is to find the minimum difference between the heights of the tallest and the shortest tower.
+# Input: arr[] = [12, 6, 4, 15, 17, 10], k = 6
+# Output: 8
+# Using Sorting - O(nlogn) Time and O(1) Space
+class Solution:
+    def minimize_max_difference_between_heights(self, arr, k):
+        n = len(arr)
+        arr.sort()
+        min_height = arr[0] + k
+        max_height = arr[-1] - k
+        result = arr[-1] - arr[0]
+        for i in range(n-1):                # this range is important 
+            if arr[i] >= k:
+                min_height = min(min_height, arr[i+1] - k)
+                max_height = max(max_height, arr[i] + k)
+                result = min(result, max_height - min_height)
+        return result
+s = Solution()
+arr = [12, 6, 4, 15, 17, 10]
+print(s.minimize_max_difference_between_heights(arr, 6))
+
+
+
+
+# Sorted subsequence of size 3
+# Given an array arr[] of n integers, find the 3 elements such that a[i] < a[j] < a[k] and i < j < k in O(n) time. 
+# If there are multiple such triplets, then print any one of them.
+# Input: arr[] = [12, 11, 10, 5, 6, 2, 30]
+# Output: 5, 6, 30
+class Solution:
+    def sorted_subsequence_of_size_3(self, arr):
+        n = len(arr)
+        first = float('inf')
+        second =float('inf')
+        previse_first = float('inf')
+        for num in arr:
+            if num <= first:
+                first = num
+            elif num <= second:
+                second = num
+                previse_first = first
+            else:
+                return (previse_first, second, num)
+        return "No such triplet exists"
+s = Solution()
+arr = [12, 11, 10, 5, 6, 2, 30]
+print(s.sorted_subsequence_of_size_3(arr))
+                      
