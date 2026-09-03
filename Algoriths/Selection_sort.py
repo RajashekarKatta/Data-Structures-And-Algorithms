@@ -134,3 +134,5 @@ class Solution:
 s = Solution()
 arr = [5, 4, 3, 2, 1]
 print(s.find_minimum(arr))
+
+
