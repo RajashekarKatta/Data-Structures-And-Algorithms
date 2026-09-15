@@ -578,3 +578,9 @@ s = Solution()
 arr = [2, 7, 11, 15]
 print(s.two_sum_sorted(arr, 9))
 
+
+
+
+
+
+

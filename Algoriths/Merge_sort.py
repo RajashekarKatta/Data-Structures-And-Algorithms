@@ -82,37 +82,7 @@ print(arr)
 
 
 
-class Solution:
-    def merge_sort(self, arr, low, mid, high):
-        i = low
-        j = mid + 1
-        while i <= mid and j <= high:
-            if arr[i] <= arr[j]:
-                i += 1
-            else:
-                value = arr[j]
-                index = j
-                while index > i:
-                    arr[index] = arr[index - 1]
-                    index -= 1
-                arr[i] = value
 
-                i += 1
-                mid += 1
-                j += 1
-
-    def merge(self, arr, low, high):
-        if low < high:
-            mid = (low + high) // 2
-            self.merge(arr, low, mid)
-            self.merge(arr, mid+1, high)
-
-            self.merge_sort(arr, low, mid, high)
-
-s = Solution()
-arr = [12, 11, 13, 5, 6, 7]
-s.merge(arr, 0, len(arr) - 1)
-print(arr)
 
 
 
